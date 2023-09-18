@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+    background-image: url(/Vueling/IMG/background.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+}
+#LR{
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Abril Fatface', cursive;
+}
+.imgderecha {
+  float: right;
+  margin-top: 200px; 
+}
+.imgderecho {
+  float: right;
+  margin-top: 130px; 
+}
+.imagen-izquierda {
+  float: right;
+  margin-right: 10px;
+}
+.container {
+  text-align: center; 
+}
+.cfv {
+  display: inline-block;
+  width: 45%; 
+  margin: 10px; 
+  vertical-align: top; 
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Login,
+.registrar {
+  display: inline-block;
+  width: 45%; 
+  margin: 10px; 
+  vertical-align: top;
+  background-color: #fff;;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.registrar{
+  margin-left: 3.77%;
+}
+
+.Login{
+  padding-bottom: 30px;
+}
+/* Estilos para los botones dentro de los divs */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; 
+
+}
+input {
+    border-radius: 5px; 
+    padding: 10px; 
+}
+
+h2 {
+  color: #333;
+}
+
+input {
+
+  background-color: lightgray;
+  border-color: transparent;
+  border-style: double;
+}
+
+
+#panelviaje{
+font-size:larger;
+  font-family: 'Abril Fatface', cursive;
+  background-color:rgba(255, 255, 255, 0.3);
+}
+
+
+.pago,
+.procesoVuelos {
+  display: inline-block;
+  width: 45%; 
+  margin: 10px; 
+  vertical-align: top; 
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#total{
+margin-top: 9.5%;
+  text-align: center;
+  margin-left: 25%;
+}
+
+.tp {
+  display: inline-block;
+  width: 45%; 
+  margin: 10px; 
+  vertical-align: top; 
+  background-color:rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 3.77%;
+}
+img {
+  border-radius: 8px; 
+}
+
