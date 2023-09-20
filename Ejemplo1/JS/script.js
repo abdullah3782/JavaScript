@@ -39,14 +39,14 @@ console.log(prod);
     
 
     //Funion arrow
-let salutacion = function () {
-    return "klk majinbu "
-}
-alert(salutacion())
+// let salutacion = function () {
+//     return "klk majinbu "
+// }
+// alert(salutacion())
 
-let salutaciones = (message)=> {
+// let salutaciones = (message)=> {
 
-    return "klk majinbu 2" + message
+//     return "klk majinbu 2" + message
 
-}
-alert(salutaciones("saludos manin"))
+// }
+// alert(salutaciones("saludos manin"))
