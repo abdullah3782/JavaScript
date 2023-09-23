@@ -1,52 +1,32 @@
-/*let age;
-age  = prompt("dime tu edad")
-console.log(age);
 
+document.getElementById("hello").innerHTML="hola majinbo" //Cambiamos el texto entrando a traves del ID
+let valors=document.getElementsByTagName("h2");
+//(valors[1] es para que coja el segundo h2 del html 
+console.log(valors[1].innerHTML);
 
-let result;
-result = confirm("Estas seguro que quieres continuar ?")
-console.log(result);
+let classe=document.getElementsByClassName("intro")
+console.log(classe);
 
-if (result==true) {
-    age=34
+console.log(document.querySelector("#hello").innerHTML);//Acceso a la intro
+console.log(document.querySelectorAll("h2.intro").innerHTML); //acceso a las classe
+console.log(document.querySelectorAll(".intro").innerHTML); //acceso a todos los tags con clase intro las classes
+
+//acceso a links
+console.log(document.getElementById("link").href);
+//cambio de link 
+document.getElementById("link").href="https://campus.proven.cat/"
+
+//Manera alternativade escribir
+
+document.write("sas")
+
+//Recojo el valor del formulario
+
+document.getElementById("myBtn").addEventListener("click", function() {
+  let myName=document.getElementById("mytext").innerHTML;
+if (myName == "David") {
+  console.log("Buenas David");
 } else {
-    age=12
-}*/
-
-/*let num;
-
-num=prompt("escriu un numero: ");
-console.log(num);
-if(isNaN(num)){
-  alert( "No es un numero");
-
-}else{ 
-  //fem el producte
-  let prod=1;
-  for(let i=1; i<=num;i++){
-    prod*=i;
-
-  }
-console.log(prod);
-}*/
-// showMessage()
-// function showMessage(){
-
-//     let message= "hello"
-//     alert(message)
-    
-//     }
-    
-
-    //Funion arrow
-// let salutacion = function () {
-//     return "klk majinbu "
-// }
-// alert(salutacion())
-
-// let salutaciones = (message)=> {
-
-//     return "klk majinbu 2" + message
-
-// }
-// alert(salutaciones("saludos manin"))
+  console.log("Buenas anonimo");
+}
+});

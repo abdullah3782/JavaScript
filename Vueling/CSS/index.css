@@ -56,10 +56,11 @@ header {
 }
 .registrar{
   margin-left: 3.77%;
+ 
 }
 
 .Login{
-  padding-bottom: 30px;
+  padding-bottom: 105px;
 }
 /* Estilos para los botones dentro de los divs */
 button {
@@ -120,11 +121,27 @@ margin-top: 9.5%;
   vertical-align: top; 
   background-color:rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 38px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-left: 3.77%;
 }
 img {
   border-radius: 8px; 
+}
+
+#search {
+
+  margin-left: 650%;
+}
+
+#searchBar {
+
+  margin-left: 530%;
+  margin-bottom: -17%;
+}
+
+#navbar {
+  padding: 27px;
+background-color: red;
 }
 
