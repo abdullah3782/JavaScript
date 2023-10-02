@@ -13,6 +13,28 @@ header {
     padding: 20px;
     text-align: center;
 }
+
+#log {
+  font-size: 19px;
+  font-weight: bold;
+
+}
+#nada {
+  font-size: 19px;
+  font-weight: bold;
+
+}
+#reg {
+  font-size: 19px;
+  font-weight: bold;
+
+}
+#cfv {
+  font-size: 19px;
+  font-weight: bold;
+
+}
+
 #LR{
   color: rgba(255, 255, 255, 0.8);
   font-family: 'Abril Fatface', cursive;

@@ -21,7 +21,7 @@
 
 <body>
     <div>
-        <nav class="navbar navbar-expand-lg" style="background-color: #fff34a;" id="navbar">
+        <nav class="navbar navbar-expand-lg" style="background-color: #FFD100;" id="navbar">
             <button class="nav-link" style="color: #4D4D4D;" id="nada">Vueling</button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <button class="nav-link " id="log" >Login</button>
+                        <button class="nav-link " id="log">Login</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="reg">Register</button>
@@ -51,10 +51,13 @@
             <label for="gmail">Correo Electrónico:</label>
             <br>
             <input type="gmail" id="correoElectronico" name="gmail">
-            <br> <br>
+            <div id="EerrMsg" style="color: red;"></div>  <div id="EcrrMsg" style="color: green;"></div>
+            <br> 
             <label for="contrasena">Contraseña:</label>
             <br>
             <input type="password" id="contrasenaUsuario" name="contrasena">
+            <div id="errMsg" style="color: red;"></div> <div id="crrMsg" style="color: green;"></div> 
+
             <br>
             <a href="">
                 <p>He olvidado mi contraseña</p>

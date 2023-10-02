@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/DNI/CSS/index.css">
+    <title>Validar DNI</title>
+</head>
+
+<body>
+    <div class="container" id="divP">
+        <div class="dniForm">
+
+            <div class="form-group">
+                <label for="numeroDni">Numero Del DNI</label>
+                <input type="text" id="myNum"placeholder="14010671"  maxlength="8" > <span style="color: red;"
+                    id="errNum"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="lletra">Letra Del DNI</label>
+                <input type="text" id="lletra" placeholder="Z" maxlength="1"> <span style="color: red;"
+                id="errLetra"></span>
+            </div>
+
+            <input type="submit" value="Submit" id="subBtn">
+
+
+        </div>
+
+        <div id="resultat">
+            <p id="vertader" style="color: red;">DNI Correcto</p>
+            <p id="fals" style="color: red;">DNI Incorrecto</p>
+        </div>
+
+    </div>
+
+    <script src="../JS/index.js"></script>
+</body>
+
+</html>

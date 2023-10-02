@@ -1,3 +1,5 @@
+
+
 const loginButton = document.getElementById("log");
 const loginForm = document.getElementById("loginForm");
 
@@ -82,3 +84,39 @@ nadaButton.addEventListener("click", function() {
 
 });
 
+
+document.getElementById("login").addEventListener("click", function() { 
+  let contra = document.getElementById("contrasenaUsuario").value;
+  let correo = document.getElementById("correoElectronico").value;
+
+
+  if (contra.length < 5) {
+    document.getElementById("errMsg").innerHTML = "La contraseña es demasiada corta" 
+    document.getElementById("crrMsg").innerHTML = ""
+  } 
+
+ else  if (contra != "alumnat") {
+    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta" 
+    document.getElementById("crrMsg").innerHTML = "" 
+
+
+  } else {
+    document.getElementById("errMsg").innerHTML = "" 
+
+    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta" 
+
+  }
+
+
+if (correo != "daw2@proven.cat") {
+  document.getElementById("EerrMsg").innerHTML = "La correo es incorrecto" 
+  document.getElementById("EcrrMsg").innerHTML = "" 
+
+
+} else {
+  document.getElementById("EcrrMsg").innerHTML = "La correo es correcto" 
+  document.getElementById("EerrMsg").innerHTML = "" 
+
+}
+
+}); 
