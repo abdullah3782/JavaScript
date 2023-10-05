@@ -1,5 +1,3 @@
-
-
 const loginButton = document.getElementById("log");
 const loginForm = document.getElementById("loginForm");
 
@@ -120,3 +118,46 @@ if (correo != "daw2@proven.cat") {
 }
 
 }); 
+
+document.getElementById("register").addEventListener("click", function() { 
+  let nom = document.getElementById("nameRegister").value;
+  let cognom = document.getElementById("correoElectronico").value;
+
+if (nom===isNaN) {
+  document.getElementById("errMsgR").innerHTML = "Tu nombre no puede ser un numero"
+} else {
+  document.getElementById("errMsgR").innerHTML = ""
+
+}
+
+
+  if (contra.length < 5) {
+    document.getElementById("errMsg").innerHTML = "La contraseña es demasiada corta" 
+    document.getElementById("crrMsg").innerHTML = ""
+  } 
+
+ else  if (contra != "alumnat") {
+    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta" 
+    document.getElementById("crrMsg").innerHTML = "" 
+
+
+  } else {
+    document.getElementById("errMsg").innerHTML = "" 
+
+    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta" 
+
+  }
+
+
+if (correo != "daw2@proven.cat") {
+  document.getElementById("EerrMsg").innerHTML = "La correo es incorrecto" 
+  document.getElementById("EcrrMsg").innerHTML = "" 
+
+
+} else {
+  document.getElementById("EcrrMsg").innerHTML = "La correo es correcto" 
+  document.getElementById("EerrMsg").innerHTML = "" 
+
+}
+
+});

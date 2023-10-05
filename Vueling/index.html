@@ -72,10 +72,12 @@
         <div class="registrar" id="registerForm" style="display: none;" >
             <img src="/Vueling/IMG/register.png" alt="" class="imgderecha">
             <h2>Registrar</h2>
-            <label for="name">Nombre:</label>
+            <label for="name" id="nameRegister">Nombre:</label>
             <br>
-            <input type="name" id="name" name="name" value="EJ:Molina">
-            <br> <br>
+            <input type="name" id="nameRegister" class="name" name="name" value="EJ:Molina">             
+            <div id="errMsgR" style="color: red;"></div> <div id="crrMsgR" style="color: green;"></div> 
+
+            <br> 
             <label for="surname">Cognoms:</label>
             <br>
             <input type="surname" id="surname" name="surname" value="Ej: Santos">
