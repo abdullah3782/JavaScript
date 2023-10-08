@@ -72,30 +72,34 @@
         <div class="registrar" id="registerForm" style="display: none;" >
             <img src="/Vueling/IMG/register.png" alt="" class="imgderecha">
             <h2>Registrar</h2>
-            <label for="name" id="nameRegister">Nombre:</label>
+            <label for="name">Nombre:</label>
             <br>
-            <input type="name" id="nameRegister" class="name" name="name" value="EJ:Molina">             
-            <div id="errMsgR" style="color: red;"></div> <div id="crrMsgR" style="color: green;"></div> 
-
+            <input type="name" id="nameRegister" class="name" name="name" > <br>            
+            <span id="errMsgNom" style="color: red;"></span> <span id="crrMsgNom" style="color: green;"></span> 
             <br> 
             <label for="surname">Cognoms:</label>
             <br>
-            <input type="surname" id="surname" name="surname" value="Ej: Santos">
-            <br> <br>
+            <input type="surname" id="surname" name="surname" >  <br>  
+            <span id="errMsgCogNom" style="color: red;"></span> <span id="crrMsgCogNom" style="color: green;"></span> 
+            <br> 
             <label for="gmail">Correo Electrónico:</label>
             <br>
-            <input type="gmail" id="gmail" name="gmail" value="tumail@gmail.com">
-            <br><br>
+            <input type="gmail" id="gmail" name="gmail" > <br>
+            <span id="errMsgCorreo" style="color: red;"></span> <span id="crrMsgCorreo" style="color: green;"></span> 
+            <br>
             <label for="contrasena">Contraseña:</label>
             <br>
-            <input type="password" id="contrasena" name="contrasena">
-            <br><br>
+            <input type="password" id="contrasena" name="contrasena"> <br>
+            <span id="errMsgContra" style="color: red;"></span> <span id="crrMsgContra" style="color: green;"></span> 
+            <br>
             <label for="name">Nombre de usuario:</label>
             <br>
-            <input type="name" id="name" name="name" value="DaleMolina23">
-            <br><br>
+            <input type="name" id="name" name="name" > <br>
+            <span id="errMsgNu" style="color: red;"></span> <span id="crrMsgNu" style="color: green;"></span> 
+            <br> <br>
             <button id="register">Registrarse</button>
-            <br><br>
+            <span id="successMessage"></span> 
+            <br>
         </div>
 
         <div id="panelviajeForm">

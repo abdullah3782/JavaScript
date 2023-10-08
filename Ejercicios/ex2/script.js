@@ -20,12 +20,6 @@ function mostrarFecha() {
 let mes = date.getMonth();
 let dia = date.getDay()
 
-
-
-
-
-
-
         console.log(date);
 
     }

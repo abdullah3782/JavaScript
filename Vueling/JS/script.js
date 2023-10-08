@@ -16,6 +16,8 @@ const panelViajeButton = document.getElementById("panelviaje");
 const panelViaje2Button = document.getElementById("panelviaje2");
 const panelViajeForm = document.getElementById("panelviajeForm");
 
+const usuarios = ["usu01", "usu02", "usu03"];
+const contrasenya = ["pass01", "pass02", "pass03"];
 
 function vacio() {
   loginForm.style.display = "none";
@@ -82,82 +84,115 @@ nadaButton.addEventListener("click", function() {
 
 });
 
+let contra = "";
+let correo = "";
 
 document.getElementById("login").addEventListener("click", function() { 
-  let contra = document.getElementById("contrasenaUsuario").value;
-  let correo = document.getElementById("correoElectronico").value;
+  contra = document.getElementById("contrasenaUsuario").value;
+  correo = document.getElementById("correoElectronico").value;
 
+  const usuarioIndex = usuarios.indexOf(correo);
 
-  if (contra.length < 5) {
-    document.getElementById("errMsg").innerHTML = "La contraseña es demasiada corta" 
-    document.getElementById("crrMsg").innerHTML = ""
-  } 
-
- else  if (contra != "alumnat") {
-    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta" 
-    document.getElementById("crrMsg").innerHTML = "" 
-
-
+  if (usuarioIndex === -1) {
+    document.getElementById("EerrMsg").innerHTML = "El correo es incorrecto";
+    document.getElementById("EcrrMsg").innerHTML = "";
+  } else if (contra !== contrasenya[usuarioIndex]) {
+    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta";
+    document.getElementById("crrMsg").innerHTML = "";
   } else {
-    document.getElementById("errMsg").innerHTML = "" 
-
-    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta" 
-
+    document.getElementById("EerrMsg").innerHTML = "";
+    document.getElementById("EcrrMsg").innerHTML = "El correo es correcto";
+    document.getElementById("errMsg").innerHTML = "";
+    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta";
   }
+});
 
-
-if (correo != "daw2@proven.cat") {
-  document.getElementById("EerrMsg").innerHTML = "La correo es incorrecto" 
-  document.getElementById("EcrrMsg").innerHTML = "" 
-
-
-} else {
-  document.getElementById("EcrrMsg").innerHTML = "La correo es correcto" 
-  document.getElementById("EerrMsg").innerHTML = "" 
-
-}
-
-}); 
-
-document.getElementById("register").addEventListener("click", function() { 
+document.getElementById("nameRegister").addEventListener("blur", function() { 
   let nom = document.getElementById("nameRegister").value;
-  let cognom = document.getElementById("correoElectronico").value;
 
-if (nom===isNaN) {
-  document.getElementById("errMsgR").innerHTML = "Tu nombre no puede ser un numero"
-} else {
-  document.getElementById("errMsgR").innerHTML = ""
-
-}
-
-
-  if (contra.length < 5) {
-    document.getElementById("errMsg").innerHTML = "La contraseña es demasiada corta" 
-    document.getElementById("crrMsg").innerHTML = ""
-  } 
-
- else  if (contra != "alumnat") {
-    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta" 
-    document.getElementById("crrMsg").innerHTML = "" 
-
+ if (nom === "") {
+    document.getElementById("errMsgNom").innerHTML = "Por favor, ingresa tu nombre";
+  } else if (!isNaN(nom)) {
+    document.getElementById("errMsgNom").innerHTML = "Tu nombre no puede ser un número";
 
   } else {
-    document.getElementById("errMsg").innerHTML = "" 
-
-    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta" 
+    document.getElementById("errMsgNom").innerHTML = "";
 
   }
 
+});
 
-if (correo != "daw2@proven.cat") {
-  document.getElementById("EerrMsg").innerHTML = "La correo es incorrecto" 
-  document.getElementById("EcrrMsg").innerHTML = "" 
+document.getElementById("surname").addEventListener("blur", function() { 
+  let cognom = document.getElementById("surname").value;
+  
+
+ if (cognom === "") {
+    document.getElementById("errMsgCogNom").innerHTML = "Por favor, ingresa tu apellido";
+  } else if (!isNaN(cognom)) {
+    document.getElementById("errMsgCogNom").innerHTML = "Tu apellido no puede ser un número";
+
+  } else {
+    document.getElementById("errMsgCogNom").innerHTML = "";
+
+  }
+
+});
+
+document.getElementById("gmail").addEventListener("blur", function() { 
+  let correoRegister = document.getElementById("gmail").value;
+  
+
+ if (correoRegister === "") {
+    document.getElementById("errMsgCorreo").innerHTML = "Por favor, ingresa tu correo";
+  } else if (!isNaN(correoRegister)) {
+    document.getElementById("errMsgCorreo").innerHTML = "Tu apellido no puede ser solo un número";
+
+  } else {
+    document.getElementById("errMsgCorreo").innerHTML = "";
+
+  }
+
+});
 
 
-} else {
-  document.getElementById("EcrrMsg").innerHTML = "La correo es correcto" 
-  document.getElementById("EerrMsg").innerHTML = "" 
+document.getElementById("contrasena").addEventListener("blur", function() { 
+  let contraRegister = document.getElementById("contrasena").value;
 
-}
+ if (contraRegister === "") {
+    document.getElementById("errMsgContra").innerHTML = "Por favor, ingresa tu contraseña";
+  } else {
+    document.getElementById("errMsgContra").innerHTML = "";
 
+  }
+
+});
+
+document.getElementById("name").addEventListener("blur", function() { 
+  let nomUsuari = document.getElementById("name").value;
+
+ if (nomUsuari === "") {
+    document.getElementById("errMsgNu").innerHTML = "Por favor, ingresa un nombre de usuario";
+  } else {
+    document.getElementById("errMsgNu").innerHTML = "";
+
+  }
+
+});
+
+document.getElementById("register").addEventListener("click", function() {
+  let nom = document.getElementById("nameRegister").value;
+  let cognom = document.getElementById("surname").value;
+  let correoRegister = document.getElementById("gmail").value;
+  let contraRegister = document.getElementById("contrasena").value;
+  let nomUsuari = document.getElementById("name").value;
+
+  if (nom !== "" && isNaN(nom) && cognom !== "" && isNaN(cognom) && correoRegister !== "" && contraRegister !== "" && nomUsuari !== "") {
+    // Todos los campos están completos correctamente
+    document.getElementById("successMessage").style.color = "green";
+    document.getElementById("successMessage").innerHTML = "Registrado con éxito";
+  } else {
+    document.getElementById("successMessage").style.color = "green";
+    document.getElementById("successMessage").innerHTML = "";
+  
+  }
 });
