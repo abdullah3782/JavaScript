@@ -112,7 +112,7 @@ document.getElementById("nameRegister").addEventListener("blur", function() {
 
  if (nom === "") {
     document.getElementById("errMsgNom").innerHTML = "Por favor, ingresa tu nombre";
-  } else if (!isNaN(nom)) {
+  } else if (isNaN(nom)) {
     document.getElementById("errMsgNom").innerHTML = "Tu nombre no puede ser un número";
 
   } else {
@@ -208,10 +208,6 @@ function calcularAnioNacimiento(edad) {
 
   document.getElementById('crrMsgEdad').textContent = 'tu año de nacimiento es: ' + anioNacimiento;
 }
-
-
-
-
 
 document.getElementById("register").addEventListener("click", function() {
   let nom = document.getElementById("nameRegister").value;
