@@ -179,6 +179,40 @@ document.getElementById("name").addEventListener("blur", function() {
 
 });
 
+document.getElementById("edad").addEventListener("blur", function() {
+  let edad = document.getElementById("edad").value;
+
+  if (edad === "") {
+      document.getElementById("errMsgEdad").innerHTML = "Por favor, ingresa tu edad";
+  } else if (isNaN(edad)) {
+      document.getElementById("errMsgEdad").innerHTML = "Tu edad no puede ser una letra";
+  } else {
+      document.getElementById("errMsgEdad").innerHTML = "";
+      calcularAnioNacimiento(edad);
+  }
+});
+
+function calcularAnioNacimiento(edad) {
+  
+  var anioActual = new Date().getFullYear();
+
+
+  var anioNacimiento = anioActual - edad;
+
+  if (edad>18) {
+    document.getElementById('errMsgEdad').textContent = 'Eres MAYOR de edad y ';
+
+  } else {
+    document.getElementById("errMsgEdad").innerHTML = 'Eres MENOR de edad y ';
+  }
+
+  document.getElementById('crrMsgEdad').textContent = 'tu año de nacimiento es: ' + anioNacimiento;
+}
+
+
+
+
+
 document.getElementById("register").addEventListener("click", function() {
   let nom = document.getElementById("nameRegister").value;
   let cognom = document.getElementById("surname").value;
@@ -196,3 +230,5 @@ document.getElementById("register").addEventListener("click", function() {
   
   }
 });
+
+
