@@ -116,7 +116,7 @@ document.getElementById("nameRegister").addEventListener("blur", function() {
     document.getElementById("errMsgNom").innerHTML = "Tu nombre no puede ser un número";
 
   } else {
-    document.getElementById("errMsgNom").innerHTML = "";
+    document.getElementById("errMsgNom").innerHTML =  "";
 
   }
 
