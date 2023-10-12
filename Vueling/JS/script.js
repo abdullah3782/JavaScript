@@ -1,5 +1,3 @@
-//declaracion de variables globales, constantes
-//constantes = asignacion de ids que estan ya en el html
 const loginButton = document.getElementById("log");
 const loginForm = document.getElementById("loginForm");
 
@@ -20,11 +18,6 @@ const panelViajeForm = document.getElementById("panelviajeForm");
 
 const usuarios = ["usu01", "usu02", "usu03"];
 const contrasenya = ["pass01", "pass02", "pass03"];
-let dni,rcontrasena,nom,cognom,correoRegister, contraRegister;
-document.getElementById("login").addEventListener("click", clickBotonLogin);
-document.getElementById("nameRegister").addEventListener("blur", myName);
-document.getElementById("surname").addEventListener("blur", mySurname);
-
 
 function vacio() {
   loginForm.style.display = "none";
@@ -94,149 +87,142 @@ nadaButton.addEventListener("click", function() {
 let contra = "";
 let correo = "";
 
-function clickBotonLogin() { 
+document.getElementById("login").addEventListener("click", function() { 
   contra = document.getElementById("contrasenaUsuario").value;
   correo = document.getElementById("correoElectronico").value;
 
   const usuarioIndex = usuarios.indexOf(correo);
-  
+
   if (usuarioIndex === -1) {
-    document.getElementById("EerrMsg").innerHTML = "Credenciales incorrectas";
-    
-  } else{
-
-      if (contra !== contrasenya[usuarioIndex]) {
-        document.getElementById("EerrMsg").innerHTML = "Credenciales incorrectas";
-        
-      } else {
-        document.getElementById("EerrMsg").innerHTML = "Usuario correcto";
-        
-      }
-
+    document.getElementById("EerrMsg").innerHTML = "El correo es incorrecto";
+    document.getElementById("EcrrMsg").innerHTML = "";
+  } else if (contra !== contrasenya[usuarioIndex]) {
+    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta";
+    document.getElementById("crrMsg").innerHTML = "";
+  } else {
+    document.getElementById("EerrMsg").innerHTML = "";
+    document.getElementById("EcrrMsg").innerHTML = "El correo es correcto";
+    document.getElementById("errMsg").innerHTML = "";
+    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta";
   }
-};
+});
 
-function myName() { 
-  nom = document.getElementById("nameRegister").value;
-  let patron=/[0-9]/;
-  if (nom.trim() === "") {
+document.getElementById("nameRegister").addEventListener("blur", function() { 
+  let nom = document.getElementById("nameRegister").value;
+
+  if (nom === "") {
     document.getElementById("errMsgNom").innerHTML = "Por favor, ingresa tu nombre";
-  } else if (patron.test(nom)) {
-    document.getElementById("errMsgNom").innerHTML = "Esto no es un nombre válido";
-
+  } else if (/\d/.test(nom)) {
+    document.getElementById("errMsgNom").innerHTML = "Tu nombre no puede contener números";
   } else {
     document.getElementById("errMsgNom").innerHTML = "";
-
   }
+});
 
-};
 
-function mySurname() { 
-  cognom = document.getElementById("surname").value;
-  let patron=/[0-9]/;
+
+document.getElementById("surname").addEventListener("blur", function() { 
+  let cognom = document.getElementById("surname").value;
+  
 
  if (cognom === "") {
     document.getElementById("errMsgCogNom").innerHTML = "Por favor, ingresa tu apellido";
-  } else if (patron.test(cognom)) {
-    document.getElementById("errMsgCogNom").innerHTML = "Esto no es un apellido válido";
+  } else if (/\d/.test(cognom)) {
+    document.getElementById("errMsgCogNom").innerHTML = "Tu apellido no puede ser un número";
+
   } else {
     document.getElementById("errMsgCogNom").innerHTML = "";
 
   }
 
-};
+});
 
 document.getElementById("gmail").addEventListener("blur", function() { 
-  correoRegister = document.getElementById("gmail").value;
-  let patron=/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-
- if (correoRegister === "") {
+  let correoRegister = document.getElementById("gmail").value;
+  
+  if (correoRegister === "") {
     document.getElementById("errMsgCorreo").innerHTML = "Por favor, ingresa tu correo";
-  } else if (!patron.test(correoRegister)) {
-    document.getElementById("errMsgCorreo").innerHTML = "Este correo electronico no es correcto";
-
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoRegister)) {
+    document.getElementById("errMsgCorreo").innerHTML = "Formato de correo electrónico no válido";
   } else {
     document.getElementById("errMsgCorreo").innerHTML = "";
-
   }
-
 });
+
 
 
 document.getElementById("contrasena").addEventListener("blur", function() { 
-  contraRegister = document.getElementById("contrasena").value;
+  let contraRegister = document.getElementById("contrasena").value;
 
  if (contraRegister === "") {
     document.getElementById("errMsgContra").innerHTML = "Por favor, ingresa tu contraseña";
-  } else if(contraRegister.length<5){
-    document.getElementById("errMsgContra").innerHTML = "Esta contraseña tiene que ser de 5 o más caracteres";
-  }else{
-    document.getElementById("errMsgContra").innerHTML="";
+  } else {
+    document.getElementById("errMsgContra").innerHTML = "";
+
   }
 
 });
 
-document.getElementById("rcontrasena").addEventListener("blur", function() { 
-  rcontrasena = document.getElementById("rcontrasena").value;
+document.getElementById("name").addEventListener("blur", function() { 
+  let nomUsuari = document.getElementById("name").value;
 
- if (rcontrasena === "") {
-    document.getElementById("errMsgCon").innerHTML = "Por favor, ingresa un nombre de usuario";
-  } else if(rcontrasena != document.getElementById("contrasena").value){
-    document.getElementById("errMsgCon").innerHTML = "No coinciden ";
-  }else{
-    document.getElementById("errMsgCon").innerHTML = "";
+ if (nomUsuari === "") {
+    document.getElementById("errMsgNu").innerHTML = "Por favor, ingresa un nombre de usuario";
+  } else {
+    document.getElementById("errMsgNu").innerHTML = "";
 
   }
 
 });
 
 document.getElementById("dni").addEventListener("blur", function() {
-  dni = document.getElementById("dni").value;
+  let dni = document.getElementById("dni").value;
 
   if (dni === "") {
-      document.getElementById("errMsgDNI").innerHTML = "Por favor, ingresa tu dni";
-  } else if (!validateDNI(dni)) {
-      document.getElementById("errMsgDNI").innerHTML = "Tu dni no es válido";
+    document.getElementById("errMsgEdad").innerHTML = "Rellena el campo";
+  } else if (dni.length != 8 || !/[A-Za-z]$/.test(dni)) {
+    document.getElementById("errMsgEdad").innerHTML = "Formato de DNI incorrecto";
   } else {
-      document.getElementById("errMsgDNI").innerHTML = "";
-       
+    document.getElementById("errMsgEdad").innerHTML = "";
   }
 });
 
-function validateDNI(dni){
- return true;
-}
-
-
-
-
-
-
 
 document.getElementById("register").addEventListener("click", function() {
- 
-  //necessita saber que tots els camps OK
+  let nom = document.getElementById("nameRegister").value;
+  let cognom = document.getElementById("surname").value;
+  let correoRegister = document.getElementById("gmail").value;
+  let contraRegister = document.getElementById("contrasena").value;
+  let nomUsuari = document.getElementById("name").value;
 
-
- 
+  if (nom !== "" && isNaN(nom) && cognom !== "" && isNaN(cognom) && correoRegister !== "" && contraRegister !== "" && nomUsuari !== "") {
+    // Todos los campos están completos correctamente
+    document.getElementById("successMessage").style.color = "green";
+    document.getElementById("successMessage").innerHTML = "Registrado con éxito";
+  } else {
+    document.getElementById("successMessage").style.color = "green";
+    document.getElementById("successMessage").innerHTML = "";
+  
+  }
 });
 
-//client: 23/10/2013  heu de fer split
-//client: 23  10  2013 les dades donades en caixes separades
-calcularAnioNacimiento(2005,11,23); //month és el que et dona el client li has de restar 1
+var idaRadioButton = document.getElementById('ida');
+var vueltaRadioButton = document.getElementById('vuelta');
 
-function calcularAnioNacimiento(year,month, day) {
-  
-  var anioCliente = new Date(year,month, day);
-  var anioActual=new Date;
+  var vueltaCalendar = document.getElementById('fechaVueltaForm');
+  var textoVuelta = document.getElementById('selectFechaVuelta');
 
-alert (anioActual-anioCliente.getTime());//treballar amb milisegons
+  // Agregar un event listener al botón "IDA"
+  idaRadioButton.addEventListener('click', function () {
+      // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
+      vueltaCalendar.style.display = 'none';
+      textoVuelta.style.display = 'none';
 
-console.log(anioActual.getFullYear()-anioCliente.getFullYear());
+  });
 
-  
- 
-  
+  vueltaRadioButton.addEventListener('click', function () {
+    // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
+    textoVuelta.style.display = 'block';
+    vueltaCalendar.style.display = 'block';
 
-  
-}
+});
