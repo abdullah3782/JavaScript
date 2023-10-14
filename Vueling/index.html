@@ -123,8 +123,8 @@
             <label for="css">IDA y Vuelta</label><br><br>
 
             <form>
-                <label for="paises">Elige el origen.</label>
-                <select id="paises" name="pais">
+                <label for="origen">Elige el origen.</label>
+                <select id="origen" name="pais">
                     <option value="espana">España</option>
                     <option value="francia">Francia</option>
                     <option value="alemania">Alemania</option>
@@ -140,8 +140,8 @@
 
             <br>
             <form>
-                <label for="paises">Elige el destino.</label>
-                <select id="paises" name="pais">
+                <label for="destino">Elige el destino.</label>
+                <select id="destino" name="pais">
                     <option value="espana">España</option>
                     <option value="francia">Francia</option>
                     <option value="alemania">Alemania</option>
@@ -153,21 +153,27 @@
                     <option value="belgica">Bélgica</option>
                     <option value="suiza">Suiza</option>
                 </select>
+                <br>
+                <span id="errMsgVuelo" style="color: red;"></span>
 
             </form>
             <br>
             <form>
                 <label for="fecha">Selecciona la fecha de ida :</label>
-                <input type="date" id="fecha" name="fecha">
+                <input type="date" id="fechaIda" name="fecha">
 
             </form>
             <br>
             <form>
                 <label for="fecha" id="selectFechaVuelta">Selecciona la fecha de vuelta :</label>
-                <input type="date" id="fechaVueltaForm" name="fecha">
-
+                <input type="date" id="fechaVuelta" name="fecha">
             </form>
+            <span id="errMsgfechas" style="color: red;"></span>
             <br>
+
+            <label for="fecha" id="numeroPersonas">Selecciona la cantidad de las personas que viajara:</label>
+            <input type="number" id="fechaVuelta" name="fecha">
+            <br><br>
             <button>Confirmar viaje</button>
         </div>
 

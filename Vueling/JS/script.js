@@ -16,8 +16,14 @@ const panelViajeButton = document.getElementById("panelviaje");
 const panelViaje2Button = document.getElementById("panelviaje2");
 const panelViajeForm = document.getElementById("panelviajeForm");
 
-const usuarios = ["usu01", "usu02", "usu03"];
-const contrasenya = ["pass01", "pass02", "pass03"];
+var idaRadioButton = document.getElementById('ida');
+var vueltaRadioButton = document.getElementById('vuelta');
+
+var fechaIdaInput = document.getElementById('fechaIda');
+var fechaVueltaInput = document.getElementById('fechaVuelta');
+
+let usuarios = ["usu01", "usu02", "usu03"];
+let contrasenya = ["pass01", "pass02", "pass03"];
 
 function vacio() {
   loginForm.style.display = "none";
@@ -29,7 +35,7 @@ function vacio() {
   panelViajeForm.style.display = "none";
 }
 vacio()
-loginButton.addEventListener("click", function() {
+loginButton.addEventListener("click", function () {
   loginForm.style.display = "block";
   registerForm.style.display = "none";
   cfv.style.display = "block";
@@ -42,7 +48,7 @@ loginButton.addEventListener("click", function() {
 
 });
 
-registerButton.addEventListener("click", function() {
+registerButton.addEventListener("click", function () {
   loginForm.style.display = "none";
   registerForm.style.display = "block";
   cfvForm.style.display = "none";
@@ -53,7 +59,7 @@ registerButton.addEventListener("click", function() {
 
 });
 
-cfvButton.addEventListener("click", function() {
+cfvButton.addEventListener("click", function () {
   loginForm.style.display = "none";
   registerForm.style.display = "none";
   cfvForm.style.display = "block";
@@ -64,7 +70,7 @@ cfvButton.addEventListener("click", function() {
 
 })
 
-tpButton.addEventListener("click", function() {
+tpButton.addEventListener("click", function () {
   loginForm.style.display = "none";
   registerForm.style.display = "none";
   cfvForm.style.display = "block";
@@ -73,7 +79,7 @@ tpButton.addEventListener("click", function() {
 
 });
 
-nadaButton.addEventListener("click", function() {
+nadaButton.addEventListener("click", function () {
   loginForm.style.display = "none";
   registerForm.style.display = "none";
   cfvForm.style.display = "none";
@@ -84,10 +90,12 @@ nadaButton.addEventListener("click", function() {
 
 });
 
+
+
 let contra = "";
 let correo = "";
 
-document.getElementById("login").addEventListener("click", function() { 
+document.getElementById("login").addEventListener("click", function () {
   contra = document.getElementById("contrasenaUsuario").value;
   correo = document.getElementById("correoElectronico").value;
 
@@ -107,7 +115,7 @@ document.getElementById("login").addEventListener("click", function() {
   }
 });
 
-document.getElementById("nameRegister").addEventListener("blur", function() { 
+document.getElementById("nameRegister").addEventListener("blur", function () {
   let nom = document.getElementById("nameRegister").value;
 
   if (nom === "") {
@@ -121,11 +129,11 @@ document.getElementById("nameRegister").addEventListener("blur", function() {
 
 
 
-document.getElementById("surname").addEventListener("blur", function() { 
+document.getElementById("surname").addEventListener("blur", function () {
   let cognom = document.getElementById("surname").value;
-  
 
- if (cognom === "") {
+
+  if (cognom === "") {
     document.getElementById("errMsgCogNom").innerHTML = "Por favor, ingresa tu apellido";
   } else if (/\d/.test(cognom)) {
     document.getElementById("errMsgCogNom").innerHTML = "Tu apellido no puede ser un número";
@@ -137,9 +145,9 @@ document.getElementById("surname").addEventListener("blur", function() {
 
 });
 
-document.getElementById("gmail").addEventListener("blur", function() { 
+document.getElementById("gmail").addEventListener("blur", function () {
   let correoRegister = document.getElementById("gmail").value;
-  
+
   if (correoRegister === "") {
     document.getElementById("errMsgCorreo").innerHTML = "Por favor, ingresa tu correo";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoRegister)) {
@@ -151,10 +159,10 @@ document.getElementById("gmail").addEventListener("blur", function() {
 
 
 
-document.getElementById("contrasena").addEventListener("blur", function() { 
+document.getElementById("contrasena").addEventListener("blur", function () {
   let contraRegister = document.getElementById("contrasena").value;
 
- if (contraRegister === "") {
+  if (contraRegister === "") {
     document.getElementById("errMsgContra").innerHTML = "Por favor, ingresa tu contraseña";
   } else {
     document.getElementById("errMsgContra").innerHTML = "";
@@ -163,10 +171,10 @@ document.getElementById("contrasena").addEventListener("blur", function() {
 
 });
 
-document.getElementById("name").addEventListener("blur", function() { 
+document.getElementById("name").addEventListener("blur", function () {
   let nomUsuari = document.getElementById("name").value;
 
- if (nomUsuari === "") {
+  if (nomUsuari === "") {
     document.getElementById("errMsgNu").innerHTML = "Por favor, ingresa un nombre de usuario";
   } else {
     document.getElementById("errMsgNu").innerHTML = "";
@@ -175,7 +183,7 @@ document.getElementById("name").addEventListener("blur", function() {
 
 });
 
-document.getElementById("dni").addEventListener("blur", function() {
+document.getElementById("dni").addEventListener("blur", function () {
   let dni = document.getElementById("dni").value;
 
   if (dni === "") {
@@ -188,7 +196,7 @@ document.getElementById("dni").addEventListener("blur", function() {
 });
 
 
-document.getElementById("register").addEventListener("click", function() {
+document.getElementById("register").addEventListener("click", function () {
   let nom = document.getElementById("nameRegister").value;
   let cognom = document.getElementById("surname").value;
   let correoRegister = document.getElementById("gmail").value;
@@ -202,17 +210,66 @@ document.getElementById("register").addEventListener("click", function() {
   } else {
     document.getElementById("successMessage").style.color = "green";
     document.getElementById("successMessage").innerHTML = "";
-  
+
   }
 });
+
+let origen = document.getElementById("origen")
+let destino = document.getElementById("destino")
+
+origen.addEventListener('blur', function () {
+  validarPaises();
+});
+
+destino.addEventListener('blur', function () {
+  validarPaises();
+});
+
+function validarPaises() {
+
+  if (origen.value == destino.value) {
+    document.getElementById("errMsgVuelo").innerHTML = "El origen y el destino no pueden ser iguales"
+  } else {
+    document.getElementById("errMsgVuelo").innerHTML = ""
+
+  }
+
+}
+
+fechaIdaInput.addEventListener('blur', function () {
+  validarFecha(fechaIdaInput);
+});
+
+fechaVueltaInput.addEventListener('blur', function () {
+  validarFecha(fechaVueltaInput);
+});
+
+
+function validarFecha(input) {
+  var fechaSeleccionada = new Date(input.value);
+  var hoy = new Date();
+  var seisMesesEnElFuturo = new Date();
+  seisMesesEnElFuturo.setMonth(seisMesesEnElFuturo.getMonth() + 6);
+
+  if (fechaSeleccionada < hoy ) {
+    document.getElementById("errMsgfechas").innerHTML = " <br> La fecha no puede ser anterior a hoy.<br>"
+
+  } else if(fechaSeleccionada > seisMesesEnElFuturo){
+
+    document.getElementById("errMsgfechas").innerHTML = " <br> La fecha no puede ser anterior a hoy ni estar a más de 6 meses en el futuro.<br>"
+
+  } else {
+    document.getElementById("errMsgfechas").innerHTML = ""
+
+  }
+}
 
 var idaRadioButton = document.getElementById('ida');
 var vueltaRadioButton = document.getElementById('vuelta');
 
-  var vueltaCalendar = document.getElementById('fechaVueltaForm');
-  var textoVuelta = document.getElementById('selectFechaVuelta');
+  var vueltaCalendar = document.getElementById('selectFechaVuelta');
+  var textoVuelta = document.getElementById('fechaVuelta');
 
-  // Agregar un event listener al botón "IDA"
   idaRadioButton.addEventListener('click', function () {
       // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
       vueltaCalendar.style.display = 'none';
@@ -221,8 +278,8 @@ var vueltaRadioButton = document.getElementById('vuelta');
   });
 
   vueltaRadioButton.addEventListener('click', function () {
-    // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
     textoVuelta.style.display = 'block';
     vueltaCalendar.style.display = 'block';
 
 });
+
