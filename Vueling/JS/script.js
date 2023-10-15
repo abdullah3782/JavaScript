@@ -19,8 +19,8 @@ const panelViajeForm = document.getElementById("panelviajeForm");
 var idaRadioButton = document.getElementById('ida');
 var vueltaRadioButton = document.getElementById('vuelta');
 
-var fechaIdaInput = document.getElementById('fechaIda');
-var fechaVueltaInput = document.getElementById('fechaVuelta');
+let fechaIdaInput = document.getElementById('fechaIda');
+let fechaVueltaInput = document.getElementById('fechaVuelta');
 
 let usuarios = ["usu01", "usu02", "usu03"];
 let contrasenya = ["pass01", "pass02", "pass03"];
@@ -246,15 +246,15 @@ fechaVueltaInput.addEventListener('blur', function () {
 
 
 function validarFecha(input) {
-  var fechaSeleccionada = new Date(input.value);
-  var hoy = new Date();
-  var seisMesesEnElFuturo = new Date();
+  let fechaSeleccionada = new Date(input.value);
+  let hoy = new Date();
+  let seisMesesEnElFuturo = new Date();
   seisMesesEnElFuturo.setMonth(seisMesesEnElFuturo.getMonth() + 6);
 
-  if (fechaSeleccionada < hoy ) {
+  if (fechaSeleccionada < hoy) {
     document.getElementById("errMsgfechas").innerHTML = " <br> La fecha no puede ser anterior a hoy.<br>"
 
-  } else if(fechaSeleccionada > seisMesesEnElFuturo){
+  } else if (fechaSeleccionada > seisMesesEnElFuturo) {
 
     document.getElementById("errMsgfechas").innerHTML = " <br> La fecha no puede ser anterior a hoy ni estar a más de 6 meses en el futuro.<br>"
 
@@ -264,22 +264,61 @@ function validarFecha(input) {
   }
 }
 
-var idaRadioButton = document.getElementById('ida');
-var vueltaRadioButton = document.getElementById('vuelta');
+let idaRadioButton = document.getElementById('ida');
+let vueltaRadioButton = document.getElementById('vuelta');
 
-  var vueltaCalendar = document.getElementById('selectFechaVuelta');
-  var textoVuelta = document.getElementById('fechaVuelta');
+let vueltaCalendar = document.getElementById('selectFechaVuelta');
+let textoVuelta = document.getElementById('fechaVuelta');
 
-  idaRadioButton.addEventListener('click', function () {
-      // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
-      vueltaCalendar.style.display = 'none';
-      textoVuelta.style.display = 'none';
-
-  });
-
-  vueltaRadioButton.addEventListener('click', function () {
-    textoVuelta.style.display = 'block';
-    vueltaCalendar.style.display = 'block';
+idaRadioButton.addEventListener('click', function () {
+  // Ocultar el calendario de vuelta si el botón "IDA" está seleccionado
+  vueltaCalendar.style.display = 'none';
+  textoVuelta.style.display = 'none';
 
 });
+
+vueltaRadioButton.addEventListener('click', function () {
+  textoVuelta.style.display = 'block';
+  vueltaCalendar.style.display = 'block';
+
+});
+
+
+let importeBase = 150;
+
+
+document.getElementById("confirmar").addEventListener("click", function () {
+
+  let origenSeleccionado = document.getElementById("origen").value;
+  let destinoSeleccionado = document.getElementById("destino").value;
+  let fechaIdaSeleccionada = document.getElementById("fechaIda").value;
+  let fechaVueltaSeleccionada = document.getElementById("fechaVuelta").value;
+  let horaSeleccionada = document.getElementById("inputHora").value;
+  let cantidadPersonas = parseInt(document.getElementById("inputPersonas").value) || 1;
+
+  if (origenSeleccionado && destinoSeleccionado && fechaIdaSeleccionada && fechaVueltaSeleccionada && horaSeleccionada) {
+    const confirmacion = confirm("¿Estás seguro de confirmar el viaje?");
+
+    if (confirmacion) {
+
+      let importeAdicional = 0;
+      if (horaSeleccionada >= "00:00" && horaSeleccionada < "06:00") {
+        importeAdicional = 60;
+      } else if (horaSeleccionada >= "06:00" && horaSeleccionada < "12:00") {
+        importeAdicional = 120;
+      }
+
+      let importeTotal = importeBase * cantidadPersonas + importeAdicional;
+
+      document.getElementById("totalDinero").innerHTML = importeTotal + "€";
+    } else {
+      alert("Viaje cancelado")
+    }
+  } else {
+    alert("Completa todos los campos antes de confirmar el viaje.")
+  }
+});
+
+
+
 

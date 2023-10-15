@@ -159,33 +159,41 @@
             </form>
             <br>
             <form>
-                <label for="fecha">Selecciona la fecha de ida :</label>
+                <label for="fecha">Selecciona la fecha de ida:</label>
+                <br><br>
                 <input type="date" id="fechaIda" name="fecha">
 
             </form>
             <br>
             <form>
-                <label for="fecha" id="selectFechaVuelta">Selecciona la fecha de vuelta :</label>
+                <label for="fecha" id="selectFechaVuelta">Selecciona la fecha de vuelta:</label>
+                <br>
                 <input type="date" id="fechaVuelta" name="fecha">
             </form>
             <span id="errMsgfechas" style="color: red;"></span>
             <br>
 
             <label for="fecha" id="numeroPersonas">Selecciona la cantidad de las personas que viajara:</label>
-            <input type="number" id="fechaVuelta" name="fecha">
+            <br>
+            <input type="number" id="inputPersonas" name="fecha">
             <br><br>
-            <button>Confirmar viaje</button>
+           
+
+            <label for="fecha" id="numeroPersonas">Selecciona la hora:</label>
+            <br>
+            <input type="time" id="inputHora" name="fecha">
+            <br><br>
+            <button id="confirmar">Confirmar viaje</button>
         </div>
 
 
         <div class="tp" id="tpForm" style="display: none;">
             <img src="/Vueling/IMG/euro.jpeg" alt="" class="imgderecho">
-            <h1 id="total">Total a pagar</h1>
-            <h1 id="total">0€</h1>
-
-
-
+            <h1 id="totalTextp" class="total">Total a pagar</h1>
+            <h1 id="totalDinero" class="total">0€</h1>
+            <div id="successMessage"></div>
         </div>
+        
 
     </div>
     <script src="./JS/script.js"></script>
