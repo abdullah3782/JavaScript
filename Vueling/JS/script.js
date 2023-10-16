@@ -264,8 +264,7 @@ function validarFecha(input) {
   }
 }
 
-let idaRadioButton = document.getElementById('ida');
-let vueltaRadioButton = document.getElementById('vuelta');
+
 
 let vueltaCalendar = document.getElementById('selectFechaVuelta');
 let textoVuelta = document.getElementById('fechaVuelta');
