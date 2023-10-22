@@ -25,6 +25,9 @@ let fechaVueltaInput = document.getElementById('fechaVuelta');
 let usuarios = ["usu01", "usu02", "usu03"];
 let contrasenya = ["pass01", "pass02", "pass03"];
 
+const paises = [ "España","Francia","Alemania", "Italia", "Reino Unido","Portugal","Suecia","Holanda", "Bélgica", "Suiza" ];
+
+
 function vacio() {
   loginForm.style.display = "none";
   registerForm.style.display = "none";
@@ -293,7 +296,9 @@ document.getElementById("confirmar").addEventListener("click", function () {
   let fechaIdaSeleccionada = document.getElementById("fechaIda").value;
   let fechaVueltaSeleccionada = document.getElementById("fechaVuelta").value;
   let horaSeleccionada = document.getElementById("inputHora").value;
-  let cantidadPersonas = parseInt(document.getElementById("inputPersonas").value) || 1;
+  let cantidadAdultos = parseInt(document.getElementById("inputAdultos").value) || 0;
+  let cantidadNinos = parseInt(document.getElementById("inputNinos").value) || 0;
+  let cantidadBebes = parseInt(document.getElementById("inputBebes").value) || 0;
 
   if (origenSeleccionado && destinoSeleccionado && fechaIdaSeleccionada && fechaVueltaSeleccionada && horaSeleccionada) {
     const confirmacion = confirm("¿Estás seguro de confirmar el viaje?");
@@ -307,7 +312,7 @@ document.getElementById("confirmar").addEventListener("click", function () {
         importeAdicional = 120;
       }
 
-      let importeTotal = importeBase * cantidadPersonas + importeAdicional;
+      let importeTotal = importeBase * (cantidadAdultos + cantidadNinos + cantidadBebes) + importeAdicional;
 
       document.getElementById("totalDinero").innerHTML = importeTotal + "€";
     } else {
@@ -316,8 +321,24 @@ document.getElementById("confirmar").addEventListener("click", function () {
   } else {
     alert("Completa todos los campos antes de confirmar el viaje.")
   }
+
+  
+
+
 });
 
 
+// Dentro de tu función de inicialización o donde sea apropiado
+function cargarPaises() {
+  const opciones = paises.map(pais => '<option value=" '+ pais + '">' + pais + '</option>'  );
+
+  // Para el select de origen
+  document.getElementById("origen").innerHTML = opciones.join('');
+
+  // Para el select de destino
+  document.getElementById("destino").innerHTML = opciones.join('');
+}
+
+cargarPaises();
 
 
