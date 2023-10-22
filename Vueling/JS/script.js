@@ -25,7 +25,7 @@ let fechaVueltaInput = document.getElementById('fechaVuelta');
 let usuarios = ["usu01", "usu02", "usu03"];
 let contrasenya = ["pass01", "pass02", "pass03"];
 
-const paises = [ "España","Francia","Alemania", "Italia", "Reino Unido","Portugal","Suecia","Holanda", "Bélgica", "Suiza" ];
+const paises = ["España", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal", "Suecia", "Holanda", "Bélgica", "Suiza"];
 
 
 function vacio() {
@@ -300,10 +300,34 @@ document.getElementById("confirmar").addEventListener("click", function () {
   let cantidadNinos = parseInt(document.getElementById("inputNinos").value) || 0;
   let cantidadBebes = parseInt(document.getElementById("inputBebes").value) || 0;
 
-  if (origenSeleccionado && destinoSeleccionado && fechaIdaSeleccionada && fechaVueltaSeleccionada && horaSeleccionada) {
+  if (origenSeleccionado && destinoSeleccionado && fechaIdaSeleccionada && fechaVueltaSeleccionada && horaSeleccionada && cantidadAdultos) {
     const confirmacion = confirm("¿Estás seguro de confirmar el viaje?");
 
+
+
+
     if (confirmacion) {
+
+      if (cantidadAdultos < 0 || cantidadAdultos > 9) {
+        document.getElementById("errMsgAdultos").innerHTML = "  La cantidad mínima es de 1 persona y la máxima es de 9 para Adultos <br>";
+      } else {
+        document.getElementById("errMsgAdultos").innerHTML = "";
+      }
+
+      if (cantidadNinos < -1 || cantidadNinos > 9) {
+        document.getElementById("errMsgNino").innerHTML = "  La cantidad mínima es de 0 persona y la máxima es de 9 para niños y bebés <br>";
+      }  else {
+        document.getElementById("errMsgNino").innerHTML = "";
+
+      }
+
+      if (cantidadBebes < -1 || cantidadBebes > 9) {
+        document.getElementById("errMsgBebe").innerHTML = "  La cantidad mínima es de 0 persona y la máxima es de 9 para niños y bebés <br>";
+      } else {
+        document.getElementById("errMsgBebe").innerHTML = "";
+
+
+      }
 
       let importeAdicional = 0;
       if (horaSeleccionada >= "00:00" && horaSeleccionada < "06:00") {
@@ -322,20 +346,17 @@ document.getElementById("confirmar").addEventListener("click", function () {
     alert("Completa todos los campos antes de confirmar el viaje.")
   }
 
-  
+
 
 
 });
 
 
-// Dentro de tu función de inicialización o donde sea apropiado
 function cargarPaises() {
-  const opciones = paises.map(pais => '<option value=" '+ pais + '">' + pais + '</option>'  );
+  const opciones = paises.map(pais => '<option value=" ' + pais + '">' + pais + '</option>');
 
-  // Para el select de origen
   document.getElementById("origen").innerHTML = opciones.join('');
 
-  // Para el select de destino
   document.getElementById("destino").innerHTML = opciones.join('');
 }
 
