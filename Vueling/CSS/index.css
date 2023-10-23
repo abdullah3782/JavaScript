@@ -56,16 +56,16 @@ header {
 }
 .cfv {
   display: inline-block;
-  width: 45%; 
-  margin: 10px; 
-  vertical-align: top; 
+  width: 45%;
+  margin: 10px auto; /* Cambiado el margin a 'auto' para centrar horizontalmente */
+  vertical-align: top;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 2%;
-
 }
+
 
 .Login,
 .registrar {
@@ -146,7 +146,7 @@ margin-top: 9.5%;
 .tp {
   display: inline-block;
   width: 45%; 
-  margin: 10px; 
+  margin: 10px auto; /* Cambiado el margin a 'auto' para centrar horizontalmente */
   vertical-align: top;
   background-color: #fff;;
   border: 1px solid #ccc;

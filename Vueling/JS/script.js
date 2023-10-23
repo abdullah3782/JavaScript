@@ -69,7 +69,7 @@ cfvButton.addEventListener("click", function () {
   tpForm.style.display = "none";
   panelViajeButton.style.display = "block";
   panelViaje2Button.style.display = "block";
-  panelViajeForm.style.display = "block";
+  panelViajeForm.style.display = "none";
 
 })
 
@@ -77,7 +77,7 @@ tpButton.addEventListener("click", function () {
   loginForm.style.display = "none";
   registerForm.style.display = "none";
   cfvForm.style.display = "block";
-  tpForm.style.display = "block";
+  tpForm.style.display = "none";
   panelViajeForm.style.display = "block";
 
 });
@@ -339,6 +339,11 @@ document.getElementById("confirmar").addEventListener("click", function () {
       let importeTotal = importeBase * (cantidadAdultos + cantidadNinos + cantidadBebes) + importeAdicional;
 
       document.getElementById("totalDinero").innerHTML = importeTotal + "€";
+      tpForm.style.display = "block";
+      cfvForm.style.display = "none";
+      panelViajeButton.style.display = "none";
+      panelViaje2Button.style.display = "none";
+
     } else {
       alert("Viaje cancelado")
     }
