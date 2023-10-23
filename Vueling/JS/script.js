@@ -310,12 +310,14 @@ document.getElementById("confirmar").addEventListener("click", function () {
 
       if (cantidadAdultos < 0 || cantidadAdultos > 9) {
         document.getElementById("errMsgAdultos").innerHTML = "  La cantidad mínima es de 1 persona y la máxima es de 9 para Adultos <br>";
+        importeTotal = 0
       } else {
         document.getElementById("errMsgAdultos").innerHTML = "";
       }
 
       if (cantidadNinos < -1 || cantidadNinos > 9) {
         document.getElementById("errMsgNino").innerHTML = "  La cantidad mínima es de 0 persona y la máxima es de 9 para niños y bebés <br>";
+        importeTotal = 0
       }  else {
         document.getElementById("errMsgNino").innerHTML = "";
 
@@ -323,10 +325,9 @@ document.getElementById("confirmar").addEventListener("click", function () {
 
       if (cantidadBebes < -1 || cantidadBebes > 9) {
         document.getElementById("errMsgBebe").innerHTML = "  La cantidad mínima es de 0 persona y la máxima es de 9 para niños y bebés <br>";
+        importeTotal = 0
       } else {
         document.getElementById("errMsgBebe").innerHTML = "";
-
-
       }
 
       let importeAdicional = 0;
@@ -355,6 +356,7 @@ document.getElementById("confirmar").addEventListener("click", function () {
 
 
 });
+let origenSeleccionado, destinoSeleccionado, fechaIdaSeleccionada, fechaVueltaSeleccionada, horaSeleccionada, cantidadAdultos, cantidadNinos, cantidadBebes;
 
 
 function cargarPaises() {
@@ -367,4 +369,22 @@ function cargarPaises() {
 
 cargarPaises();
 
+function mostrarDetallesViaje(origen, destino, fechaIda, fechaVuelta, hora, adultos, ninos, bebes) {
+  const detallesViaje = document.getElementById("detallesViaje");
+  detallesViaje.innerHTML = `
+      <h3>Detalles del Viaje</h3>
+      <p>Origen: ${origen}</p>
+      <p>Destino: ${destino}</p>
+      <p>Fecha de Ida: ${fechaIda}</p>
+      <p>Fecha de Vuelta: ${fechaVuelta}</p>
+      <p>Hora: ${hora}</p>
+      <p>Adultos: ${adultos}</p>
+      <p>Niños: ${ninos}</p>
+      <p>Bebés: ${bebes}</p>
+      <!-- Agrega más detalles según sea necesario -->
+  `;
+  detallesViaje.style.display = "block";
+}
 
+// Asegúrate de que las variables estén disponibles globalmente o en un alcance adecuado
+mostrarDetallesViaje()

@@ -177,3 +177,22 @@ img {
   margin-right: 10px;
   
  }
+ #detallesViaje {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+#detallesViaje h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#detallesViaje p {
+  margin: 8px 0;
+}
