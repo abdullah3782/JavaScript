@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Validación</title>
+  <link rel="stylesheet" href="/UF2/exClase/css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="date-time" id="date-time"></div>
+  <h2>Formulario de Validación</h2>
+
+  <form id="loginForm" style="display:none;">
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" required disabled>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena" required disabled>
+
+    <button type="button" onclick="validarFormulario()" disabled>Validar</button>
+  </form>
+
+  <div id="courseSelector" style="display:none;">
+    <label for="courses">Selecciona un curso:</label>
+    <select id="courses" disabled>
+      <option value="daw">DAW</option>
+      <option value="dam">DAM</option>
+      <option value="asix">ASIX</option>
+    </select>
+
+    <button onclick="logout()" disabled>Logout</button>
+  </div>
+
+</div>
+
+<div id="bottomDiv">
+  <p>Texto del div</p>
+  <button onclick="aceptar()">Aceptar</button>
+</div>
+
+<div id="cookieMessage">
+  <p>Un cop acceptat aquest missatge, s’ha de crear una cookie per a guardar aquesta informació a fi que el missatge no li torni a sortir a l’usuari fins passada una setmana.</p>
+  <button onclick="acceptCookies()">Acceptar</button>
+</div>
+
+<script src="/UF2/exClase/js/script.js"></script>
+
+</body>
+</html>

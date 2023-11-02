@@ -296,7 +296,7 @@ document.getElementById("confirmar").addEventListener("click", function () {
   let fechaIdaSeleccionada = document.getElementById("fechaIda").value;
   let fechaVueltaSeleccionada = document.getElementById("fechaVuelta").value;
   let horaSeleccionada = document.getElementById("inputHora").value;
-  let cantidadAdultos = parseInt(document.getElementById("inputAdultos").value) || 0;
+  let cantidadAdultos = parseInt(document.getElementById("inputAdultos").value) || 1; //para que el valor de adultos minimo sea 1
   let cantidadNinos = parseInt(document.getElementById("inputNinos").value) || 0;
   let cantidadBebes = parseInt(document.getElementById("inputBebes").value) || 0;
 
@@ -386,5 +386,4 @@ function mostrarDetallesViaje(origen, destino, fechaIda, fechaVuelta, hora, adul
   detallesViaje.style.display = "block";
 }
 
-// Asegúrate de que las variables estén disponibles globalmente o en un alcance adecuado
 mostrarDetallesViaje()
