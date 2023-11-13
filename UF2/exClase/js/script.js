@@ -1,92 +1,120 @@
+let iniciarSessionBtn = document.getElementById("iniciarsesion")
+let logoutbtn = document.getElementById("logOut")
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Obtenemos fecha y hora de ahora
+    function getCurrentDateTime() {
+        let options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+        };
+        let locale = 'ca-ES';
+        let dateTime = new Date().toLocaleString(locale, options);
+        return dateTime;
+    }
+
+    function updateDateTime() {
+        let dateTimeElement = document.getElementById('dateTime');
+        dateTimeElement.innerHTML = `Avui és ${getCurrentDateTime()}`;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+   
+})
+
+
+
 function acceptCookies() {
-    // Crear cookie que expira en una semana
-    document.cookie = "cookieAccepted=true; max-age=" + 60 * 60 * 24 * 7;
-  
-    // Ocultar el mensaje de cookies
-    document.getElementById('cookieMessage').style.display = 'none';
-  
-    // Habilitar los elementos del formulario y del selector de cursos
-    var formElements = document.getElementById('loginForm').elements;
-    for (var i = 0; i < formElements.length; i++) {
-      formElements[i].removeAttribute('disabled');
-    }
-  
-    var selectorElements = document.getElementById('courseSelector').elements;
-    for (var i = 0; i < selectorElements.length; i++) {
-      selectorElements[i].removeAttribute('disabled');
-    }
-  }
+    // Código para crear y almacenar la cookie
+    document.getElementById("cookieConsent").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    logoutbtn.style.display = "none";
+    localStorage.setItem('cookiesAccepted', 'true');
 
-function validarFormulario() {
-  var usuario = document.getElementById('usuario').value;
-  var contrasena = document.getElementById('contrasena').value;
-
-  // Lógica de validación de usuario y contraseña
-  // Supongamos que users es un array de objetos con usuarios y contraseñas
-  var users = [
-    { usuario: 'user1', contrasena: 'pass1' },
-    { usuario: 'user2', contrasena: 'pass2' },
-    // ... otros usuarios ...
-  ];
-
-  var validacion = false;
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].usuario === usuario && users[i].contrasena === contrasena) {
-      validacion = true;
-      break;
-    }
-  }
-
-  if (validacion) {
-    // Mostrar el selector de cursos y el botón de logout
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('courseSelector').style.display = 'block';
-
-    // Guardar en localStorage que el usuario ha iniciado sesión
-    localStorage.setItem('isLoggedIn', true);
-  } else {
-    // Avisar al usuario en caso de validación incorrecta
-    alert('Usuario o contraseña incorrectos');
-  }
+    // Habilitar campos de usuario y contraseña
+    document.getElementById("username").removeAttribute('disabled');
+    document.getElementById("password").removeAttribute('disabled');
+    document.getElementById("iniciarsesion").removeAttribute('disabled');
 }
 
-function actualizarFechaHora() {
-    var date = new Date();
-    var dateTimeElement = document.getElementById('date-time');
-    dateTimeElement.textContent = 'Fecha y hora actual: ' + date.toLocaleString();
-  }
+document.getElementById("iniciarsesion").addEventListener("click", function () {
+    
+    
+    let usuaris = ["usu01" ];
+    let contrasenyes = ["pass01"];
+    
+    let usuarioIngresado = document.getElementById("username").value;
+    let contrasenaIngresada = document.getElementById("password").value;
+    
+    
+      var indiceUsuario = usuaris.indexOf(usuarioIngresado);
+      if (indiceUsuario !== -1 && contrasenyes[indiceUsuario] === contrasenaIngresada) {
+        var selectElement = document.createElement("select");
+        selectElement.id = "miSelect"; // Puedes darle el ID que prefieras
+      
+        // Crear las opciones y agregarlas al select
+        var option1 = document.createElement("option");
+        option1.value = "DAM";
+        option1.text = "DAM";
+        selectElement.add(option1);
+      
+        var option2 = document.createElement("option");
+        option2.value = "DAW";
+        option2.text = "DAW";
+        selectElement.add(option2);
+      
+        var option3 = document.createElement("option");
+        option3.value = "ASIX";
+        option3.text = "ASIX";
+        selectElement.add(option3);
+      
+        // Agregar el select al documento
+        document.body.appendChild(selectElement);
 
-  function aceptar() {
-    // Habilitar los elementos del formulario y del selector de cursos
-    var formElements = document.getElementById('loginForm').elements;
-    for (var i = 0; i < formElements.length; i++) {
-      formElements[i].removeAttribute('readonly');
-    }
+
+        document.getElementById("username").value = "";
+        errorUser.style.display = "none";
+        goodUser.style.display = "block";
+        iniciarSessionBtn.style.display = "none";
+        logoutbtn.style.display = "block";
+
+      } else {
+        document.getElementById("errorContra").innerHTML = "Credencial incorrecta"
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        errorUser.style.display = "block";
+        goodUser.style.display = "none";
+        
+      }
+    
+    
+    
+    });
+
   
-    var selectorElements = document.getElementById('courses').options;
-    for (var i = 0; i < selectorElements.length; i++) {
-      selectorElements[i].removeAttribute('disabled');
-    }
-  
-    // Ocultar el mensaje de cookies
-    document.getElementById('cookieMessage').style.display = 'block';
-  }
 
-  function aceptar() {
-    // Mostrar el formulario
-    document.getElementById('loginForm').style.display = 'block';
-  }
+function logout() {
+    // Restablecer el formulario
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
 
-// Verificar si el usuario ya está logueado al cargar la página
-window.onload = function () {
-  if (localStorage.getItem('isLoggedIn')) {
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('courseSelector').style.display = 'block';
-  }
-};
+    // Deshabilitar campos de usuario y contraseña
+    document.getElementById("username").setAttribute('disabled', 'true');
+    document.getElementById("password").setAttribute('disabled', 'true');
+    document.getElementById("iniciarsesion").setAttribute('disabled', 'true');
 
-// Actualizar la fecha y hora cada segundo
-setInterval(actualizarFechaHora, 1000);
+    // Eliminar información de la sesión
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('cookiesAccepted');
 
-// Llamar a actualizarFechaHora al cargar la página para mostrar la hora actual
-actualizarFechaHora();
+    // Recargar la página
+    window.location.reload();
+}
