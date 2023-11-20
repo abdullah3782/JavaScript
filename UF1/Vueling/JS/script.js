@@ -27,6 +27,137 @@ let contrasenya = ["pass01", "pass02", "pass03"];
 
 const paises = ["España", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal", "Suecia", "Holanda", "Bélgica", "Suiza"];
 
+document.addEventListener("DOMContentLoaded", function () {
+
+  /**
+   * check, check2 --> llama a la funcion checkYourCookie pasando le el nombre de la cookie, retorna true si ya existe, y false si no existe
+   */
+  let check = checkYourCookie("nomUsuari");
+  let check2 = checkYourCookie("contador");
+
+  let cookieAvanzar = getCookie("contador");
+
+  if(cookieAvanzar != "") {
+
+      cookieAvanzar++;
+      setCookie("contador", cookieAvanzar);
+  }
+
+
+  /**
+   * Comprueba que los dos valores sean false, si son false los DOS llama la funcion showCookieModal
+   */
+  if (!check && !check2) {
+      showCookieModal();
+  }
+
+
+  /**
+   * localStorage("login"): true --> muestra el la opción del LOGOUT
+   * localStorage("login"): false --> muestra solo la opción de LOGIN y REGISTER, no muestra la opción LOGOUT
+   */
+  if (localStorage.getItem("login") == "true") {
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("register-btn").style.display = "none";
+      document.getElementById("logout-btn").style.display = "block";
+  } else {
+      document.getElementById("login-btn").style.display = "block";
+      document.getElementById("register-btn").style.display = "block";
+      document.getElementById("logout-btn").style.display = "none";
+  }
+
+
+  /**
+   * Al recargar todos los formularios estarán ocultos
+   */
+  document.getElementById("login-div").style.display = "none";
+  document.getElementById("register-div").style.display = "none";
+  document.getElementById("booking-div").style.display = "none";
+  document.getElementById("result").style.display = "none";
+  document.getElementById("validationMessage").style.display = "none";
+
+
+
+});
+
+/**
+ * showCookieModal() --> muestra el div para aceptar las cookies con tres opciones
+ * allCookies --> allCookies();
+ * minCookies --> minCookies();
+ */
+function showCookieModal() {
+  document.getElementById("allCookiesBtn").addEventListener("click", allCookies);
+  document.getElementById("minCookiesBtn").addEventListener("click", minCookies);
+  document.getElementById("rechazarCookiesBtn").addEventListener("click", rechazarCookies);
+
+  document.getElementById("cookieModal").style.display = "block";
+}
+
+/**
+* allCookies() --> crea las dos cookies
+*/
+
+function allCookies() {
+  setCookie("nomUsuari", "acceptada la cookie", 365);
+  setCookie("contador", 1, 365);
+
+  document.getElementById("cookieModal").style.display = "none";
+}
+
+/**
+* minCookies() --> crea solo una cookie
+*/
+function minCookies() {
+  setCookie("nomUsuari", "acceptada la cookie", 365);
+  document.getElementById("cookieModal").style.display = "none";
+}
+
+
+/**
+* rechazarCookies() --> no crea cookies, pero cada vez que se recargue preguntará el modal, porque no existen cookies
+*/
+function rechazarCookies() {
+  document.getElementById("cookieModal").style.display = "none";
+}
+
+
+
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkYourCookie(accept) {
+  let acceptCookie = getCookie(accept);
+
+  let existe = true;
+
+  if (acceptCookie == "") {
+    existe = false;
+  }
+
+  return existe;
+}
+
 
 function vacio() {
   loginForm.style.display = "none";
@@ -248,6 +379,9 @@ fechaVueltaInput.addEventListener('blur', function () {
 });
 
 
+
+
+
 function validarFecha(input) {
   let fechaSeleccionada = new Date(input.value);
   let hoy = new Date();
@@ -318,7 +452,7 @@ document.getElementById("confirmar").addEventListener("click", function () {
       if (cantidadNinos < -1 || cantidadNinos > 9) {
         document.getElementById("errMsgNino").innerHTML = "  La cantidad mínima es de 0 persona y la máxima es de 9 para niños y bebés <br>";
         importeTotal = 0
-      }  else {
+      } else {
         document.getElementById("errMsgNino").innerHTML = "";
 
       }
