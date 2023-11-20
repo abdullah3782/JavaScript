@@ -37,10 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let cookieAvanzar = getCookie("contador");
 
-  if(cookieAvanzar != "") {
+  if (cookieAvanzar != "") {
 
-      cookieAvanzar++;
-      setCookie("contador", cookieAvanzar);
+    cookieAvanzar++;
+    setCookie("contador", cookieAvanzar);
   }
 
 
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
    * Comprueba que los dos valores sean false, si son false los DOS llama la funcion showCookieModal
    */
   if (!check && !check2) {
-      showCookieModal();
+    showCookieModal();
   }
 
 
@@ -57,13 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
    * localStorage("login"): false --> muestra solo la opción de LOGIN y REGISTER, no muestra la opción LOGOUT
    */
   if (localStorage.getItem("login") == "true") {
-      document.getElementById("login-btn").style.display = "none";
-      document.getElementById("register-btn").style.display = "none";
-      document.getElementById("logout-btn").style.display = "block";
+    document.getElementById("login-btn").style.display = "none";
+    document.getElementById("register-btn").style.display = "none";
+    document.getElementById("logout-btn").style.display = "block";
   } else {
-      document.getElementById("login-btn").style.display = "block";
-      document.getElementById("register-btn").style.display = "block";
-      document.getElementById("logout-btn").style.display = "none";
+    document.getElementById("login-btn").style.display = "block";
+    document.getElementById("register-btn").style.display = "block";
+    document.getElementById("logout-btn").style.display = "none";
   }
 
 
@@ -233,20 +233,55 @@ document.getElementById("login").addEventListener("click", function () {
   contra = document.getElementById("contrasenaUsuario").value;
   correo = document.getElementById("correoElectronico").value;
 
-  const usuarioIndex = usuarios.indexOf(correo);
+  let myUser = {
+    email: emailVal,
+    password: passwdVal
+}
+  //POST
+  fetch('http://localhost:3000/vueling/login', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(myUser),
+  })
+    .then(response => response.json())
+    .then(responseData => {
+      if (responseData.error) {
+        alert(responseData.message);
+      } else {
+        if (responseData.results && responseData.results.length > 0) {
+          alert("Credenciales correctas");
+          localStorage.setItem("login", true);
+          // showLoginTrue();
 
-  if (usuarioIndex === -1) {
-    document.getElementById("EerrMsg").innerHTML = "El correo es incorrecto";
-    document.getElementById("EcrrMsg").innerHTML = "";
-  } else if (contra !== contrasenya[usuarioIndex]) {
-    document.getElementById("errMsg").innerHTML = "La contraseña es incorrecta";
-    document.getElementById("crrMsg").innerHTML = "";
-  } else {
-    document.getElementById("EerrMsg").innerHTML = "";
-    document.getElementById("EcrrMsg").innerHTML = "El correo es correcto";
-    document.getElementById("errMsg").innerHTML = "";
-    document.getElementById("crrMsg").innerHTML = "La contraseña es correcta";
-  }
+          //cuando se haya logueado correctamente, se pondra a block el logout, los demas a none
+          document.getElementById("login-btn").style.display = "none";
+          document.getElementById("register-btn").style.display = "none";
+          document.getElementById("logout-btn").style.display = "block";
+
+
+
+          // localStorage.setItem("loggedIn", true);
+
+          document.getElementById("result").style.display = "block";
+          document.getElementById("result").innerHTML = "<h2 class='text-center pt-3'>Login Results </h2> <p class='pt-4'>LOGEADO CORRECTAMENTE</p>";
+        } else {
+          alert("Credenciales incorrectas");
+
+          //cuando no se haya logueado correctamente, se pondra a block el login y register, logout  a none
+          document.getElementById("login-btn").style.display = "block";
+          document.getElementById("register-btn").style.display = "block";
+          document.getElementById("logout-btn").style.display = "none";
+
+
+
+          document.getElementById("result").style.display = "block";
+          document.getElementById("result").innerHTML = "<h2 class='text-center pt-3'>Login Results </h2> <p class='pt-4'>USUARIO Y/O CONTRASEÑA INCORRECTA</p>";
+        }
+      }
+    })
+    .catch(err => console.log('La solicitud ha fallado:', err));
 });
 
 document.getElementById("nameRegister").addEventListener("blur", function () {
@@ -260,6 +295,37 @@ document.getElementById("nameRegister").addEventListener("blur", function () {
     document.getElementById("errMsgNom").innerHTML = "";
   }
 });
+
+
+
+
+const formulariDiv = document.getElementById("formulari");
+//GET
+fetch('http://localhost:3000/vueling/booking')
+  .then(response => response.json())
+  .then(json => {
+    if (json.error) { //comprueba si hay algun error, si lo hay, lo muestra
+      formulariDiv.innerHTML = json.message;
+    } else {
+      //si no hay ningun error crea las opcions dinamicamente y las muestra
+      for (let index = 0; index < json.results.length; index++) {
+
+        const optionCiudad = document.createElement('option');
+        optionCiudad.value = json.results[index].nomCiutat;
+        optionCiudad.textContent = json.results[index].nomCiutat;
+        origen.appendChild(optionCiudad);
+
+        const optionDestino = document.createElement('option');
+        optionDestino.value = json.results[index].nomCiutat;
+        optionDestino.textContent = json.results[index].nomCiutat;
+        destino.appendChild(optionDestino);
+      }
+
+      // Mostrar el formulario después de cargar las opciones
+      formulariDiv.style.display = 'block';
+    }
+  })
+  .catch(error => console.log('La solicitud ha fallado:', error));
 
 
 
