@@ -23,7 +23,9 @@
         <input type="number" id="edad" name="edad" required>
         <div id="errorEdad" style="color: red;"></div>
 
-        <button type="button" onclick="validarDatos()">Validar</button>
+        <!-- Quita el onclick y deja que el script maneje el evento -->
+        <button type="button" id="botonValidar">Validar</button>
+        <div id="datosValidados" style="color: red;"></div>
     </form>
 </body>
 
