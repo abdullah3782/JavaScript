@@ -1,61 +1,72 @@
-<!DOCTYPE html>
-<html lang="es">
-
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ejemplo JQuery</title>
-  <!-- Enlace al archivo CSS de Bootstrap desde la CDN de Bootstrap -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Droppable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+    .draggable-item { width: 160px; height: 110px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+    .draggableCoche { width: 150px; height: 120px; border: 2px solid blue; }
+    .draggableMoto { border: 2px solid red; width: 150px; height: 120px;}
+    #droppableMotos { width: 150px; height: 120px; padding: 0.5em; float: left; margin: 10px; border: 2px solid red; }
+    #droppableCoches { width: 150px; height: 120px; padding: 0.5em; float: left; margin: 10px; border: 2px solid blue; }
+    body {
+      background-color: black;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+    $(function() {
+      $(".draggableCoche, .draggableMoto").draggable({
+        revert: "invalid" // Vuelve a la posición original si no se suelta en un droppable válido
+      });
+    
+      $("#droppableMotos").droppable({
+        accept: ".draggableMoto",
+        drop: function(event, ui) {
+          $(this)
+            .addClass("ui-state-highlight")
+            .find("p")
+            .html("Moto Dropped!");
+        }
+      });
+  
+      // Configuración para los coches
+      $("#droppableCoches").droppable({
+        accept: ".draggableCoche",
+        drop: function(event, ui) {
+          $(this)
+            .addClass("ui-state-highlight")
+            .find("p")
+            .html("Coche Dropped!");
+        }
+      });
+    });
+  </script>
 </head>
-
 <body>
-  <div class="container">
-    <div class="card text-start mt-4">
-      <div class="card-body">
-        <h4 class="card-title">Probando jQuery</h4>
-        <p class="card-text">Datos de usuario:</p>
-        <div class="card">
-          <form>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" />
-                <small style="color: red;" id="smallErrorNombre"></small>
-                <small style="color: green;" id="smallNombreOk"></small>
-              </li>
-              <li class="list-group-item">
-                <label for="dni">DNI:</label>
-                <input type="text" class="form-control" id="dni" placeholder="Ingrese su DNI" />
-                <small style="color: red;" id="smallErrorDni"></small>
-                <small style="color: green;" id="smallDniOk"></small>
-              </li>
-              <li class="list-group-item">
-                <label for="edad">Edad:</label>
-                <input type="text" class="form-control" id="edad" placeholder="Ingrese su edad" />
-                <small style="color: red;" id="smallErrorEdad"></small>
-                <small style="color: green;" id="smallEdadOk"></small>
-              </li>
-            </ul>
-            <button type="button" class="btn btn-primary mt-1 mb-1" id="myBtn">
-              Validar
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div>
+    <img src="/UF2/JQuerry/EX2/img/audiRS.jpeg" alt="" class="draggableCoche"> 
+    <img src="/UF2/JQuerry/EX2/img/audiRS7.jpeg" alt="" class="draggableCoche">  
+    <img src="/UF2/JQuerry/EX2/img/cb500f.jpeg" alt="" class="draggableMoto">  
+    <img src="/UF2/JQuerry/EX2/img/cbr650r.jpeg" alt="" class="draggableMoto">  
+    <img src="/UF2/JQuerry/EX2/img/hureacan.jpeg" alt="" class="draggableCoche">  
+    <img src="/UF2/JQuerry/EX2/img/m100rr.jpeg" alt="" class="draggableMoto">  
+    <img src="/UF2/JQuerry/EX2/img/mt09.jpeg" alt="" class="draggableMoto">  
+    <img src="/UF2/JQuerry/EX2/img/r1.jpeg" alt="" class="draggableMoto">  
+    <img src="/UF2/JQuerry/EX2/img/RS6_ABT.jpeg" alt="" class="draggableCoche">  
+    <img src="/UF2/JQuerry/EX2/img/v4.jpeg" alt="" class="draggableMoto">  
+</div>
 
-  <!-- Cargo scripts -->
-
-  <!-- Link a mi vendor Jquery -->
-  <!-- <script src="./vendor/jquery-3.7.1.min.js"></script> -->
-  <!-- Link a CDN de Google-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-  <!-- Mi archivo JQuery -->
-  <script src="/UF2/JQuerry/EX2/JS/index.js"></script>
+<div id="droppableMotos" class="ui-widget-header">
+  <p>Seccion Moto</p>
+</div>
+<div id="droppableCoches" class="ui-widget-header">
+  <p>Seccion Coches</p>
+</div>
+ 
 </body>
-
 </html>
