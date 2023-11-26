@@ -11,7 +11,7 @@ $(document).ready(function(){
        
       }
       
-      cargarPaises();
+    cargarPaises();
       
     $("#btn1").click(function(){
         $("ol").prepend("<li>Nueva Ciudad</li>");
@@ -21,4 +21,15 @@ $(document).ready(function(){
     $("#btn2").click(function(){
       $("ol").append("<li>Nueva Ciudad</li>");
     });
+
+    $("#btn3").click(function(){
+      $("ol li:first").remove();
+    });
+    
+    
+    $("#btn4").click(function(){
+      $("ol li:last").remove();
+    });
+    
+
   });
