@@ -382,24 +382,13 @@ document.getElementById("contrasena").addEventListener("blur", function () {
 
 });
 
-document.getElementById("name").addEventListener("blur", function () {
-  let nomUsuari = document.getElementById("name").value;
-
-  if (nomUsuari === "") {
-    document.getElementById("errMsgNu").innerHTML = "Por favor, ingresa un nombre de usuario";
-  } else {
-    document.getElementById("errMsgNu").innerHTML = "";
-
-  }
-
-});
 
 document.getElementById("dni").addEventListener("blur", function () {
   let dni = document.getElementById("dni").value;
 
   if (dni === "") {
     document.getElementById("errMsgEdad").innerHTML = "Rellena el campo";
-  } else if (dni.length != 8 || !/[A-Za-z]$/.test(dni)) {
+  } else if (!/^\d{8}[A-Za-z]$/.test(dni)) {
     document.getElementById("errMsgEdad").innerHTML = "Formato de DNI incorrecto";
   } else {
     document.getElementById("errMsgEdad").innerHTML = "";
@@ -407,23 +396,53 @@ document.getElementById("dni").addEventListener("blur", function () {
 });
 
 
+
 document.getElementById("register").addEventListener("click", function () {
   let nom = document.getElementById("nameRegister").value;
   let cognom = document.getElementById("surname").value;
   let correoRegister = document.getElementById("gmail").value;
   let contraRegister = document.getElementById("contrasena").value;
-  let nomUsuari = document.getElementById("name").value;
+  let dni = document.getElementById("dni").value;
 
-  if (nom !== "" && isNaN(nom) && cognom !== "" && isNaN(cognom) && correoRegister !== "" && contraRegister !== "" && nomUsuari !== "") {
-    // Todos los campos están completos correctamente
-    document.getElementById("successMessage").style.color = "green";
-    document.getElementById("successMessage").innerHTML = "Registrado con éxito";
+
+  if (nom !== "" && isNaN(nom) && cognom !== "" && isNaN(cognom) && correoRegister !== "" && contraRegister !== "") {
+    let myUser = {
+      name: nom,
+      surname: cognom,
+      password: contraRegister,
+      email: correoRegister,
+      dni: dni
+    };
+
+    fetch('http://localhost:3000/vueling/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myUser)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Registro exitoso, mostrar mensaje de éxito o redirigir a otra página
+        document.getElementById("successMessage").style.color = "green";
+        document.getElementById("successMessage").innerHTML = "Registrado con éxito";
+      } else {
+        // Mostrar mensaje de error del servidor
+        document.getElementById("successMessage").style.color = "red";
+        document.getElementById("successMessage").innerHTML = data.message;
+      }
+    })
+    .catch(error => {
+      // Manejar errores de red o del servidor
+      console.error('Error:', error);
+    });
   } else {
-    document.getElementById("successMessage").style.color = "green";
-    document.getElementById("successMessage").innerHTML = "";
-
+    document.getElementById("successMessage").style.color = "red";
+    document.getElementById("successMessage").innerHTML = "Por favor, completa todos los campos correctamente.";
   }
 });
+
 
 let origen = document.getElementById("origen")
 let destino = document.getElementById("destino")
