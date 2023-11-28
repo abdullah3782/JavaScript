@@ -25,7 +25,7 @@ let fechaVueltaInput = document.getElementById('fechaVuelta');
 let usuarios = ["usu01", "usu02", "usu03"];
 let contrasenya = ["pass01", "pass02", "pass03"];
 
-const paises = ["España", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal", "Suecia", "Holanda", "Bélgica", "Suiza"];
+//const paises = ["España", "Francia", "Alemania", "Italia", "Reino Unido", "Portugal", "Suecia", "Holanda", "Bélgica", "Suiza"];
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -51,31 +51,24 @@ document.addEventListener("DOMContentLoaded", function () {
     showCookieModal();
   }
 
-
   /**
    * localStorage("login"): true --> muestra el la opción del LOGOUT
    * localStorage("login"): false --> muestra solo la opción de LOGIN y REGISTER, no muestra la opción LOGOUT
    */
-  if (localStorage.getItem("login") == "true") {
-    document.getElementById("login-btn").style.display = "none";
-    document.getElementById("register-btn").style.display = "none";
+  if (localStorage.getItem("login") != null) {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("cfvForm").style.display = "block";
     document.getElementById("logout-btn").style.display = "block";
   } else {
-    document.getElementById("login-btn").style.display = "block";
-    document.getElementById("register-btn").style.display = "block";
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("cfvForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
     document.getElementById("logout-btn").style.display = "none";
+    document.getElementById("cfv").style.display = "none";
+
+    
   }
-
-
-  /**
-   * Al recargar todos los formularios estarán ocultos
-   */
-  document.getElementById("login-div").style.display = "none";
-  document.getElementById("register-div").style.display = "none";
-  document.getElementById("booking-div").style.display = "none";
-  document.getElementById("result").style.display = "none";
-  document.getElementById("validationMessage").style.display = "none";
-
 
 
 });
@@ -172,7 +165,6 @@ vacio()
 loginButton.addEventListener("click", function () {
   loginForm.style.display = "block";
   registerForm.style.display = "none";
-  cfv.style.display = "block";
   cfvForm.style.display = "none";
   tpForm.style.display = "none";
   panelViajeButton.style.display = "none";
@@ -234,9 +226,10 @@ document.getElementById("login").addEventListener("click", function () {
   correo = document.getElementById("correoElectronico").value;
 
   let myUser = {
-    email: emailVal,
-    password: passwdVal
+    email: correo,
+    password: contra
 }
+
   //POST
   fetch('http://localhost:3000/vueling/login', {
     method: "POST",
@@ -256,22 +249,21 @@ document.getElementById("login").addEventListener("click", function () {
           // showLoginTrue();
 
           //cuando se haya logueado correctamente, se pondra a block el logout, los demas a none
-          document.getElementById("login-btn").style.display = "none";
-          document.getElementById("register-btn").style.display = "none";
+          document.getElementById("log").style.display = "none";
+          document.getElementById("reg").style.display = "none";
           document.getElementById("logout-btn").style.display = "block";
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("registerForm").style.display = "none";
+          document.getElementById("cfvForm").style.display = "block";
 
 
-
-          // localStorage.setItem("loggedIn", true);
-
-          document.getElementById("result").style.display = "block";
-          document.getElementById("result").innerHTML = "<h2 class='text-center pt-3'>Login Results </h2> <p class='pt-4'>LOGEADO CORRECTAMENTE</p>";
+      
         } else {
           alert("Credenciales incorrectas");
 
           //cuando no se haya logueado correctamente, se pondra a block el login y register, logout  a none
-          document.getElementById("login-btn").style.display = "block";
-          document.getElementById("register-btn").style.display = "block";
+          document.getElementById("log").style.display = "block";
+          document.getElementById("reg").style.display = "block";
           document.getElementById("logout-btn").style.display = "none";
 
 
@@ -296,9 +288,28 @@ document.getElementById("nameRegister").addEventListener("blur", function () {
   }
 });
 
+document.getElementById("logout-btn").addEventListener("click", () => {
+  localStorage.removeItem("login");
+  window.location.href = "index.html"
+  // document.getElementById("log").style.display = "block";
+  // document.getElementById("reg").style.display = "block";
+  // document.getElementById("logout-btn").style.display = "none";
+  // document.getElementById("loginForm").style.display = "block";
+  //    document.getElementById("registerForm").style.display = "block";
+  //   document.getElementById("cfvForm").style.display = "none";
+  
+});
 
-
-
+document.getElementById("reg").addEventListener("click", () => {
+  
+  document.getElementById("log").style.display = "block";
+  document.getElementById("reg").style.display = "block";
+  document.getElementById("logout-btn").style.display = "none";
+   document.getElementById("loginForm").style.display = "none";
+   document.getElementById("registerForm").style.display = "block";
+    document.getElementById("cfvForm").style.display = "none";
+  
+});
 const formulariDiv = document.getElementById("formulari");
 //GET
 fetch('http://localhost:3000/vueling/booking')
@@ -558,16 +569,6 @@ document.getElementById("confirmar").addEventListener("click", function () {
 });
 let origenSeleccionado, destinoSeleccionado, fechaIdaSeleccionada, fechaVueltaSeleccionada, horaSeleccionada, cantidadAdultos, cantidadNinos, cantidadBebes;
 
-
-function cargarPaises() {
-  const opciones = paises.map(pais => '<option value=" ' + pais + '">' + pais + '</option>');
-
-  document.getElementById("origen").innerHTML = opciones.join('');
-
-  document.getElementById("destino").innerHTML = opciones.join('');
-}
-
-cargarPaises();
 
 function mostrarDetallesViaje(origen, destino, fechaIda, fechaVuelta, hora, adultos, ninos, bebes) {
   const detallesViaje = document.getElementById("detallesViaje");

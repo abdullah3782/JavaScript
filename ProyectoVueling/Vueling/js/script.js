@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let cookieAvanzar = getCookie("contador");
 
-    if(cookieAvanzar != "") {
+    if (cookieAvanzar != "") {
 
         cookieAvanzar++;
         setCookie("contador", cookieAvanzar);
@@ -499,12 +499,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     const optionCiudad = document.createElement('option');
                     optionCiudad.value = json.results[index].nomCiutat;
                     optionCiudad.textContent = json.results[index].nomCiutat;
+                    let nuevaVar = optionCiudad.cloneNode(true)
                     selectOrigen.appendChild(optionCiudad);
-
-                    const optionDestino = document.createElement('option');
-                    optionDestino.value = json.results[index].nomCiutat;
-                    optionDestino.textContent = json.results[index].nomCiutat;
-                    selectDestino.appendChild(optionDestino);
+                    selectDestino.appendChild(nuevaVar);
                 }
 
                 // Mostrar el formulario después de cargar las opciones
