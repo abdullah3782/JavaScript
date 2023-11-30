@@ -169,8 +169,7 @@ app.post('/vueling/login', function (req, res) {
 });
 
 app.post('/vueling/register', function (req, res) {
-    const { Nom, Cognoms, email, password, DNI_complet } = req.body;
-
+    const { name, surname, email, password, dni } = req.body;
     // Verificar si el usuario ya existe en la base de datos
     connection.query('SELECT * FROM usuarios WHERE email = ?', [email], function (error, results, fields) {
         if (error) {
@@ -188,13 +187,13 @@ app.post('/vueling/register', function (req, res) {
                     message: "El correo electrónico ya está registrado"
                 });
             } else {
-                connection.query('INSERT INTO usuarios (Nom, Cognoms, email, password, DNI_complet) VALUES (?, ?, ?, ?, ?)', [Nom, Cognoms, email, password, DNI_complet], function (error, results) {
+                connection.query('INSERT INTO usuarios (Nom, Cognoms, email, password, DNI_complet) VALUES (?, ?, ?, ?, ?)', [name, surname, email, password, dni], function (error, results) {
                     if (error) {
                         console.error('Error en la inserción de usuario:', error);
                         res.status(400).json({
                             error: true,
                             results: null,
-                            message: "Error en la inserción de usuario"
+                            // message: [Nom, Cognoms, email, password, DNI_complet],
                         });
                     } else {
                         res.status(201).json({
