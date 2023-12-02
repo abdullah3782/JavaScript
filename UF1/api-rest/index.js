@@ -179,7 +179,12 @@ app.post('/vueling/register', function (req, res) {
                 results: null,
                 message: "Error al verificar usuario existente"
             });
-        } else {
+        } 
+     
+        
+        
+        else {
+            
             if (results.length > 0) {
                 res.status(409).json({
                     error: true,
@@ -206,4 +211,4 @@ app.post('/vueling/register', function (req, res) {
             }
         }
     });
-});
+} );

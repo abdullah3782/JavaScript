@@ -372,15 +372,17 @@ document.getElementById("gmail").addEventListener("blur", function () {
 
 document.getElementById("contrasena").addEventListener("blur", function () {
   let contraRegister = document.getElementById("contrasena").value;
+  let errMsgContra = document.getElementById("errMsgContra");
 
   if (contraRegister === "") {
-    document.getElementById("errMsgContra").innerHTML = "Por favor, ingresa tu contraseña";
+    errMsgContra.innerHTML = "Por favor, ingresa tu contraseña";
+  } else if (contraRegister.length < 8) {
+    errMsgContra.innerHTML = "Tiene que ser mayor de 8 caracteres";
   } else {
-    document.getElementById("errMsgContra").innerHTML = "";
-
+    errMsgContra.innerHTML = ""; // Limpiar el mensaje de error si la contraseña es válida
   }
-
 });
+
 
 
 document.getElementById("dni").addEventListener("blur", function () {
@@ -403,9 +405,19 @@ document.getElementById("register").addEventListener("click", function () {
   let correoRegister = document.getElementById("gmail").value;
   let contraRegister = document.getElementById("contrasena").value;
   let dni = document.getElementById("dni").value;
+  const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
-  if (nom !== "" && isNaN(nom) && cognom !== "" && isNaN(cognom) && correoRegister !== "" && contraRegister !== "") {
+  if (
+    nom !== "" &&
+    isNaN(nom) &&
+    cognom !== "" &&
+    isNaN(cognom) &&
+    correoRegister !== "" &&
+    contraRegister.length >= 8 && 
+    dniRegex.test(dni) && 
+    emailRegex.test(correoRegister) 
+  ) {
     let myUser = {
       name: nom,
       surname: cognom,
@@ -423,7 +435,7 @@ document.getElementById("register").addEventListener("click", function () {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.success) {
+      if (data.error === false) {
         // Registro exitoso, mostrar mensaje de éxito o redirigir a otra página
         document.getElementById("successMessage").style.color = "green";
         document.getElementById("successMessage").innerHTML = "Registrado con éxito";
