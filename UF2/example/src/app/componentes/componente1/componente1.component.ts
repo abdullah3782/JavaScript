@@ -6,7 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./componente1.component.css']
 })
 export class Componente1Component {
-nombre:string="MARIA"
-edad:number=10
+  //atributos de la clase (atributos públicos)
+  nombre:string="Maria";
+  edad:number=10;
+  frutas:string[]=["pera","manzana"];//arrays
+  arboles:Array<string>=["peral", "manzano"];//arrays
+  flag:boolean=true;
 
+
+//método de la clase
+
+  saludo(){
+    alert("Hola");
+  }
 }
