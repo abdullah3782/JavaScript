@@ -4,10 +4,6 @@
   touched: he dejado el control, aunque no haya escrito nada -- untouched
   dirty: tengo que escribir dentro para que se de cuenta -- pristine
 -->
-
-
-
-
 <p> Nombre:
   <input type="text" formControlName="nombre">
    <span *ngIf="this.formContacto.get('nombre')?.errors?.['required'] && this.formContacto.get('nombre')?.touched">
@@ -21,12 +17,15 @@
    </span>
 </p>
 <p> Edad:
-  <input type="text" formControlName="edad" >
+  <input type="text" formControlName="edad" mayorEdad>
   <span *ngIf="this.formContacto.get('edad')?.errors?.['required'] && this.formContacto.get('edad')?.touched">
     La edad no puede estar vacía
    </span>
    <span *ngIf="this.formContacto.get('edad')?.errors?.['pattern'] && this.formContacto.get('edad')?.touched">
     La edad tiene que ser numérica
+   </span>
+   <span *ngIf="this.formContacto.get('edad')?.errors?.['custom'] && this.formContacto.get('edad')?.touched">
+    La edad tiene es menor que 18
    </span>
 </p>
 <p> Email:
@@ -45,3 +44,5 @@
 <button type="submit" [disabled]="formContacto.invalid">Confirma datos</button>
 
 </form>
+<div> {{nom | uppercase}}</div>
+<div> {{data | date:'medium' }}</div>

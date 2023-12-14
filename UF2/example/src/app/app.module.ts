@@ -11,7 +11,7 @@ import { Componente2Component } from './componentes/componente2/componente2.comp
 //cargar a mano
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MayoredadDirective } from './directives/mayoredad.directive';
-
+//FormsModule se usa para Template Forms --> [(ngModel)]
 
 
 @NgModule({

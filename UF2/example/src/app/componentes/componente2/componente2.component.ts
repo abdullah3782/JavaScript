@@ -8,6 +8,10 @@ import {FormControl, FormGroup, Validators} from  '@angular/forms';//importacion
 })
 export class Componente2Component {
 
+nom:string="Maria";
+data=new Date();
+
+
   formContacto=new FormGroup({
     nombre:new FormControl('',[
       Validators.required,
