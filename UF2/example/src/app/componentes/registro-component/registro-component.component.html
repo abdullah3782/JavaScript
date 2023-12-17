@@ -36,9 +36,41 @@
    <span *ngIf="this.formContacto.get('email')?.errors?.['email'] && this.formContacto.get('email')?.touched">
     El email no tiene el formato correcto
    </span>
-   
-
 </p>
+
+<p> Contrasenya:
+  <input type="password" formControlName="contrasenya">
+  <span *ngIf="this.formContacto.get('contrasenya')?.errors?.['required'] && this.formContacto.get('contrasenya')?.touched">
+    El contrasenya no puede estar vacía
+   </span>
+   <span *ngIf="this.formContacto.get('contrasenya')?.errors?.['minlength'] && this.formContacto.get('contrasenya')?.touched">
+    El contrasenya no puede tener menos de 8 caracteres
+   </span>
+</p>
+
+<p>Estat civil:
+  <select formControlName="estatCivil">
+    <option value="Casat/da">Casat/da</option>
+    <option value="Solter/a">Solter/a</option>
+    <option value="Divorciat/da">Divorciat/da</option>
+  </select>
+</p>
+
+<p>Sexe:
+  <label><input type="radio" value="Dona" formControlName="sexe">Dona</label>
+  <label><input type="radio" value="Home" formControlName="sexe">Home</label>
+  <label><input type="radio" value="Altres" formControlName="sexe">Altres</label>
+</p>
+
+<p>De què vols rebre informació?
+  <label><input type="checkbox" formControlName="informacio.videojocs"> Videojocs</label>
+  <label><input type="checkbox" formControlName="informacio.accessoris"> Accessoris</label>
+  <label><input type="checkbox" formControlName="informacio.novetatsMercat"> Novetats del mercat</label>
+</p>
+<p>Acceptar condicions:
+  <label><input type="checkbox" formControlName="acceptarCondicions"> Acceptar condicions</label>
+</p>
+
 <button type="submit" [disabled]="formContacto.invalid">Confirma datos</button>
 
 </form>

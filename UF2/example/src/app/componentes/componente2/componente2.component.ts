@@ -26,8 +26,7 @@ data=new Date();
       Validators.required,
       //Validators.pattern('/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/')
       Validators.email //<----es una validación muy débil
-    ]
-    )
+    ])
    })
    submit(){
 

@@ -11,6 +11,7 @@ import { Componente2Component } from './componentes/componente2/componente2.comp
 //cargar a mano
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MayoredadDirective } from './directives/mayoredad.directive';
+import { RegistroComponentComponent } from './componentes/registro-component/registro-component.component';
 //FormsModule se usa para Template Forms --> [(ngModel)]
 
 
@@ -19,7 +20,8 @@ import { MayoredadDirective } from './directives/mayoredad.directive';
     AppComponent,
     Componente1Component,
     Componente2Component,
-    MayoredadDirective
+    MayoredadDirective,
+    RegistroComponentComponent,
   ],
   imports: [
     BrowserModule,
