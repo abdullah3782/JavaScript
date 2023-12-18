@@ -12,6 +12,7 @@ import { Componente2Component } from './componentes/componente2/componente2.comp
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MayoredadDirective } from './directives/mayoredad.directive';
 import { RegistroComponentComponent } from './componentes/registro-component/registro-component.component';
+import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
 //FormsModule se usa para Template Forms --> [(ngModel)]
 
 
@@ -22,6 +23,7 @@ import { RegistroComponentComponent } from './componentes/registro-component/reg
     Componente2Component,
     MayoredadDirective,
     RegistroComponentComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

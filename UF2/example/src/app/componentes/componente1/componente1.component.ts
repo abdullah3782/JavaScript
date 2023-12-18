@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/model/User';
 
 @Component({
   selector: 'app-componente1',
@@ -12,7 +13,7 @@ export class Componente1Component {
   frutas:string[]=["pera","manzana"];//arrays
   arboles:Array<string>=["peral", "manzano"];//arrays
   flag:boolean=true;
-
+  user:User=new User ("Pere", "Garcia")
 
 //método de la clase
 
