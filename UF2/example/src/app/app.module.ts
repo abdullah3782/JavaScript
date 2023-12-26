@@ -1,35 +1,27 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//cargados automaticamente
-import { Componente1Component } from './componentes/componente1/componente1.component';
-import { Componente2Component } from './componentes/componente2/componente2.component';
-
-
-//cargar a mano
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MayoredadDirective } from './directives/mayoredad.directive';
-import { RegistroComponentComponent } from './componentes/registro-component/registro-component.component';
-import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
-//FormsModule se usa para Template Forms --> [(ngModel)]
-
+import { FormularioComponent } from './formulario/formulario.component';
+import { MayorEdadDirectiveDirective } from './mayor-edad-directive.directive';
+import { ValidarPasswordDirective } from './validarPassword/validar-password.directive';
+import { ValidarNombreDirective } from './validarNombre/validar-nombre.directive';
+import { ValidarEmailDirective } from './validarEmail/validar-email.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Componente1Component,
-    Componente2Component,
-    MayoredadDirective,
-    RegistroComponentComponent,
-    PageNotFoundComponent,
+    FormularioComponent,
+    MayorEdadDirectiveDirective,
+    ValidarPasswordDirective,
+    ValidarNombreDirective,
+    ValidarEmailDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
