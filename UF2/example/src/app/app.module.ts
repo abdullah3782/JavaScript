@@ -8,6 +8,7 @@ import { MayorEdadDirectiveDirective } from './mayor-edad-directive.directive';
 import { ValidarPasswordDirective } from './validarPassword/validar-password.directive';
 import { ValidarNombreDirective } from './validarNombre/validar-nombre.directive';
 import { ValidarEmailDirective } from './validarEmail/validar-email.directive';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import { ValidarEmailDirective } from './validarEmail/validar-email.directive';
     MayorEdadDirectiveDirective,
     ValidarPasswordDirective,
     ValidarNombreDirective,
-    ValidarEmailDirective
-  ],
+    ValidarEmailDirective,
+    PageNotFoundComponent
+    ],
   imports: [
     BrowserModule,
     FormsModule,

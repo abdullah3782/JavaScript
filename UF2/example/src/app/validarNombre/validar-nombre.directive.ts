@@ -11,7 +11,8 @@ export class ValidarNombreDirective {
   constructor() { }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    const patron = /^[a-zA-Z]{6,}$/; //patron nombre
+    
+    let patron = /^[a-zA-Z]{6,}$/; 
 
     if (!patron.test(control.value)) {
       return { custom: true };
