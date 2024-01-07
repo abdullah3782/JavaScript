@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormularioComponent {
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fromBuilder: FormBuilder) {
   }
 
   formulario!: FormGroup;
@@ -23,16 +23,16 @@ export class FormularioComponent {
   }
 
   initForm(): FormGroup {
-    return this.fb.group({
-      userName: ["", [Validators.required]],
+    return this.fromBuilder.group({
+      userName: "",
       pass: ["", [Validators.required, Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/)]],
-      validPass: ["", [Validators.required]],
+      validPass: "",
       mail: ["", [Validators.required]],
       estadoCivil: ["", [Validators.required]],
       sexo: ["", [Validators.required]],
       informacion: ["", [Validators.required]],
       acceptarCondicions: ["", [Validators.required]],
-      edad: ["", [Validators.required]]
     });
   }
+  
 }

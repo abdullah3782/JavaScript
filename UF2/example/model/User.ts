@@ -1,6 +1,6 @@
 export class User{
-  //classe JS = classe TS, però cal ficar tipus
-  #nom:string;//atribut nom, es privat (per això fiquem #)
+  
+  #nom:string;
   #cognom:string;
 
   constructor(nom:string, cognom:string){
