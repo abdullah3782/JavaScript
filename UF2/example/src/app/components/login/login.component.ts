@@ -9,7 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // atributos de la clase
+  // atributos de clase
   login: FormGroup;
   newUser: User;
   mensaje: string;
