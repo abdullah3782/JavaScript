@@ -10,9 +10,14 @@ export class UsuariosService {
   constructor() {
     this.initUsuarios();
   }
+
+  getUsuarios(): User[] {
+    return this.usuarios;
+  }
+
   private initUsuarios(): void {
-    for (let i = 0; i < 301; i++) {
-      this.usuarios.push(new User('usuario' + i, 'con' + i));
+    for (let i = 0; i < 11; i++) {
+      this.usuarios.push(new User('Abdu' + i, 'abdu' + i));
     }
   }
 

@@ -1,0 +1,25 @@
+<div class="container">
+<div class="row mt-5">
+<div class="">
+<table class="table table-striped">
+<thead>
+<tr>
+ <th scope="col">Usuario</th>
+ <th scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let user of usuarios">
+<td>{{ user.nomUsuari }}</td>
+<td (click)="editarUsuario(user)">
+<button>Editar</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h5 *ngIf="editUser != undefined">
+  <app-editar-usuario [usuario]="editUser"></app-editar-usuario>
+</h5>

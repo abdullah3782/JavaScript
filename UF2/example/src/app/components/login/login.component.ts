@@ -9,7 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // atributos de clase
+  // atributos de la clase
   login: FormGroup;
   newUser: User;
   mensaje: string;
@@ -37,9 +37,9 @@ export class LoginComponent {
     );
 
     if (this.usuarioService.validateUsers(this.newUser)) {
-      this.mensaje = 'Usuario validado correctamente.';
+      this.mensaje = 'Validación correcta.';
     } else {
-      this.mensaje = 'Error: Usuario no encontrado.';
+      this.mensaje = 'Usuario no encontrado.';
     }
   }
 }
