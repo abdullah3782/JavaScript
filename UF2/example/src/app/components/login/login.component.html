@@ -7,15 +7,16 @@
       <!--Nom-->
       <div class="form-group">
         <legend class="mt-4">Nom d'usuari* :</legend>
-        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari">
+        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari"
+          >
 
         <div *ngIf="this.login.get('nomUsuari')?.errors?.['required'] && this.login.get('nomUsuari')?.touched"
           class="alert alert-danger">
-        Campo Obligatorio
+          Aquest camp és obligatori.
         </div>
         <div *ngIf="this.login.get('nomUsuari')?.errors?.['pattern'] && this.login.get('nomUsuari')?.touched"
           class="alert alert-danger">Només
-          Tiene que tener un minimo de 6 caracteres, con mayusculas y minusculas tambien
+          admet lletres i números ha de tenir un mínim de 6 caràcters.
         </div>
       </div>
 
@@ -24,13 +25,16 @@
         <legend class="mt-4">Contrasenya* :</legend>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contrasenya"
           autocomplete="off" formControlName="contrasenya">
-        <div *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
+        <div
+          *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
           class="alert alert-danger">
-        Campo Obligatorio
+          Aquest camp és obligatori.
         </div>
-        <div *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
+        <div
+          *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
           class="alert alert-danger">
-Tiene que tener un minimo de 4 caracteres, con mayusculas y minusculas tambien        </div>
+          Ha de contenir lletres i números i tenir un mínim de 4 caràcters.
+        </div>
 
       </div>
 
@@ -40,9 +44,10 @@ Tiene que tener un minimo de 4 caracteres, con mayusculas y minusculas tambien  
     </fieldset>
   </form>
 
-  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'"
-    class="alert mt-3">
-    {{ mensaje }}
+  <div class="text-center mt-3">
+    <p *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'text-danger' : 'text-success'">
+      {{ mensaje }}
+    </p>
   </div>
 
 </div>

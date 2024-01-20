@@ -11,9 +11,10 @@ import { ValidarEmailDirective } from './directives/validar-email.directive';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
 import { CookieService } from 'ngx-cookie-service';
+import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
 import { LoginComponent } from './components/login/login.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
-import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
     ValidarNomDirective,
     NotfoundComponent,
     ValidarRepetirDirective,
+    EjemplosComponent,
     LoginComponent,
     ListUsersComponent,
-    EditarUsuarioComponent,
+    EditUserComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [CookieService],

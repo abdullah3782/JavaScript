@@ -37,9 +37,9 @@ export class LoginComponent {
     );
 
     if (this.usuarioService.validateUsers(this.newUser)) {
-      this.mensaje = 'Validación correcta.';
+      this.mensaje = 'Usuario validado correctamente.';
     } else {
-      this.mensaje = 'Usuario no encontrado.';
+      this.mensaje = 'Error: Usuario no encontrado.';
     }
   }
 }

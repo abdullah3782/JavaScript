@@ -8,8 +8,8 @@ export class User {
   #condicions: boolean;
 
   constructor(
-    nomUsuari: string,
-    contrasenya: string,
+    nomUsuari: string='',
+    contrasenya: string='',
     correuElectronic: string = '',
     estatCivil: string = '',
     sexe: string = '',

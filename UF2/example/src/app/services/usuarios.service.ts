@@ -10,15 +10,16 @@ export class UsuariosService {
   constructor() {
     this.initUsuarios();
   }
+   private initUsuarios(): void {
 
-  getUsuarios(): User[] {
-    return this.usuarios;
-  }
-
-  private initUsuarios(): void {
-    for (let i = 0; i < 11; i++) {
-      this.usuarios.push(new User('Abdu' + i, 'abdu' + i));
+     let sex = ['Home', 'Dona', 'Altres'];
+     let status = ['Casat/da', 'Solter/a', 'Divorciat/da'];
+     let info = ['Videojocs', 'Accessoris', 'Novetats del mercat'];
+    for (let i = 0; i < 10; i++) {
+      let j = Math.floor(Math.random() * 3);
+      this.usuarios.push(new User('usuario' + i, 'con' + i,'usuario'+i+'@gmail.com', status[j],sex[j], info[j], true));
     }
+   // console.log(this.usuarios);
   }
 
   validateUsers(user: User): boolean {
@@ -26,5 +27,12 @@ export class UsuariosService {
       (u) =>
         u.nomUsuari === user.nomUsuari && u.contrasenya === user.contrasenya
     );
+  }
+
+  getUsers():User[]{
+    return this.usuarios;
+  }
+  changeUser(user:User): void{
+
   }
 }

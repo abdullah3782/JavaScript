@@ -1,25 +1,27 @@
 <div class="container">
-<div class="row mt-5">
-<div class="">
+<h1 class="lead"><strong>LLISTAT D'USUARIS</strong></h1>
 <table class="table table-striped">
-<thead>
-<tr>
- <th scope="col">Usuario</th>
- <th scope="col">Acciones</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let user of usuarios">
-<td>{{ user.nomUsuari }}</td>
-<td (click)="editarUsuario(user)">
-<button>Editar</button>
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+
+      <th scope="col">Nom d'usuari</th>
+      <th scope="col">Correu electrònic</th>
+      <th scope="col">Acció</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active" *ngFor="let usuario of usuarios">
+
+      <td>{{usuario.nomUsuari}}</td>
+      <td>{{usuario.correuElectronic}}</td>
+      <td><button type="button" (click)="getOne(usuario)" class="btn btn-primary btn-lg">Editar</button></td>
+    </tr>
+
+  </tbody>
 </table>
+
+<div *ngIf="flag">
+
+  <app-edit-user [valor]="user" (userModified)="update($event)"></app-edit-user>
+
 </div>
-</div>
-</div>
-<h5 *ngIf="editUser != undefined">
-  <app-editar-usuario [usuario]="editUser"></app-editar-usuario>
-</h5>

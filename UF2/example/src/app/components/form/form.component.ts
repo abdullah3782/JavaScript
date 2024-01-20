@@ -13,9 +13,8 @@ export class FormComponent {
   sex: string[];
   status: string[];
   info: string[];
-  newUser!: User;
+  newUser: User;
   auxiliarInfo: string[];
-  today: Date;
 
   constructor() {
     this.formulari = new FormGroup({
@@ -39,7 +38,7 @@ export class FormComponent {
     this.status = ['Casat/da', 'Solter/a', 'Divorciat/da'];
     this.info = ['Videojocs', 'Accessoris', 'Novetats del mercat'];
     this.auxiliarInfo = [];
-    this.today = new Date();
+    this.newUser = new User('', '', '', '', '', '', false);
   }
 
   enviament(): void {
@@ -56,7 +55,7 @@ export class FormComponent {
     );
 
     console.log(this.newUser);
-    localStorage.setItem('firstName', 'Alexis');
+    localStorage.setItem('firstName', 'Sara');
   }
 
   recollint(item: string): void {
