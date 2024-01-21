@@ -10,9 +10,9 @@ export class UsuariosService {
   constructor() {
     this.initUsuarios();
   }
-   private initUsuarios(): void {
+   private initUsuarios(): void  {
 
-     let sex = ['Home', 'Dona', 'Altres'];
+     let sex = ['Home', 'Dona', 'Altress'];
      let status = ['Casat/da', 'Solter/a', 'Divorciat/da'];
      let info = ['Videojocs', 'Accessoris', 'Novetats del mercat'];
     for (let i = 0; i < 10; i++) {
