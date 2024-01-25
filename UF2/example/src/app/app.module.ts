@@ -1,31 +1,38 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
-import { JuegoComponent } from './components/juego/juego.component';
-import { DadoComponent } from './components/dado/dado.component';
-import { PanelNumericoComponent } from './components/panel-numerico/panel-numerico.component';
-import { SelectorNumericoComponent } from './components/selector-numerico/selector-numerico.component';
-import { CronometroComponent } from './components/cronometro/cronometro.component';
-import { ContenedorCronometroComponent } from './components/contenedor-cronometro/contenedor-cronometro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { FormComponent } from './components/form/form.component';
+import { ValidarNomDirective } from './directives/validar-nom.directive';
+import { ValidarEmailDirective } from './directives/validar-email.directive';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
+import { CookieService } from 'ngx-cookie-service';
+import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
+import { LoginComponent } from './components/login/login.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JuegoComponent,
-    DadoComponent,
-    PanelNumericoComponent,
-    SelectorNumericoComponent,
-    CronometroComponent,
-    ContenedorCronometroComponent
+    ValidarEmailDirective,
+    FormComponent,
+    ValidarNomDirective,
+    NotfoundComponent,
+    ValidarRepetirDirective,
+    EjemplosComponent,
+    LoginComponent,
+    ListUsersComponent,
+    EditarUsuarioComponent,
+    LogoutComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
+  providers: [CookieService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
