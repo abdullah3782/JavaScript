@@ -1,0 +1,20 @@
+<div>
+  <h3>Exemple 2: ús d'@ViewChild junt a @Input</h3>
+  <app-selector-numerico [minimo]="1" [maximo]="10" #selector1></app-selector-numerico>
+  <br>
+  <button (click)="fijarSelector1(1)">Fijar en 1</button><br>
+  <button (click)="fijarSelector1(5)">Fijar en 5</button><br>
+  <button (click)="fijarSelector1(10)">Fijar en 10</button>
+  <hr>
+  <app-selector-numerico [minimo]="1" [maximo]="10" #selector2 ></app-selector-numerico>
+  <br>
+  <button (click)="fijarSelector2(1)">Fijar en 1</button><br>
+  <button (click)="fijarSelector2(5)">Fijar en 5</button><br>
+  <button (click)="fijarSelector2(10)">Fijar en 10</button>
+  <hr>
+  <app-selector-numerico [minimo]="1" [maximo]="10" #selector3 ></app-selector-numerico>
+  <br>
+  <button (click)="selector3.fijar(1)">Fijar en 1</button><br>
+  <button (click)="selector3.fijar(5)">Fijar en 5</button><br>
+  <button (click)="selector3.fijar(10)">Fijar en 10</button>
+</div>

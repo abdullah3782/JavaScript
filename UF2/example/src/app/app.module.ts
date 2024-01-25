@@ -1,36 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
-import { FormComponent } from './components/form/form.component';
-import { ValidarNomDirective } from './directives/validar-nom.directive';
-import { ValidarEmailDirective } from './directives/validar-email.directive';
-import { NotfoundComponent } from './components/notfound/notfound.component';
-import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
-import { CookieService } from 'ngx-cookie-service';
-import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
-import { LoginComponent } from './components/login/login.component';
-import { ListUsersComponent } from './components/list-users/list-users.component';
-import { EditUserComponent } from './components/edit-user/edit-user.component';
+
+import { JuegoComponent } from './components/juego/juego.component';
+import { DadoComponent } from './components/dado/dado.component';
+import { PanelNumericoComponent } from './components/panel-numerico/panel-numerico.component';
+import { SelectorNumericoComponent } from './components/selector-numerico/selector-numerico.component';
+import { CronometroComponent } from './components/cronometro/cronometro.component';
+import { ContenedorCronometroComponent } from './components/contenedor-cronometro/contenedor-cronometro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValidarEmailDirective,
-    FormComponent,
-    ValidarNomDirective,
-    NotfoundComponent,
-    ValidarRepetirDirective,
-    EjemplosComponent,
-    LoginComponent,
-    ListUsersComponent,
-    EditUserComponent,
+    JuegoComponent,
+    DadoComponent,
+    PanelNumericoComponent,
+    SelectorNumericoComponent,
+    CronometroComponent,
+    ContenedorCronometroComponent
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
-  providers: [CookieService],
-  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
