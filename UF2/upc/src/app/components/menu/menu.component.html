@@ -1,0 +1,40 @@
+<nav
+class="navbar navbar-expand-lg bg-primary"
+  style="width: 100vw; height: 12vh;" 
+  data-bs-theme="dark">
+  <div class="container-fluid">
+    <!-- <a class="navbar-brand" href="#">Exercici Angular</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#"
+            >Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <!-- Menu -->
+        <!-- *ngIf="logeado" -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/formulari">Event</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/list-users">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Contact Us</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="/logout">Logout</a>
+          </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

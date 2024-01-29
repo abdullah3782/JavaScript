@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import"~bootswatch/dist/Vapor/bootstrap.min.css";
+
 body {
-    background-image: url(./assets/img/fondo.png);
-    background-size: 90% 80%; /* Ajusta el tamaño al 100% del ancho y alto del contenedor */
+    background-image: url(./assets/img/fondo.jpg);
+    background-size: 100% 107%; 
     background-repeat: no-repeat;
-    width: 100vw; /* Establece el ancho del contenedor al 100% del ancho de la ventana */
-    height: 100vh; /* Evita la repetición de la imagen */
-}
+    width: 97vw; 
+    height: 98.2vh; }
