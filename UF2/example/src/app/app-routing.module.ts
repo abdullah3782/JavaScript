@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormComponent } from './components/form/form.component';
-import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { QuisomComponent } from './components/quisom/quisom.component';
+import { EquipComponent } from './components/equip/equip.component';
+import { RegistroComponent } from './components/registro/registro.component';
 import { LoginComponent } from './components/login/login.component';
-import { ListUsersComponent } from './components/list-users/list-users.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { LogoutComponent } from './components/logout/logout.component';
-
+import { MerchandisingComponent } from './components/merchandising/merchandising.component';
+import { CompraComponent } from './components/compra/compra.component';
 
 const routes: Routes = [
-  {path: 'formulari', component: FormComponent},
-  {path: 'ejemplos', component: EjemplosComponent},
+  {path: 'quisom', component: QuisomComponent},
+  {path: 'equip', component: EquipComponent},
+  {path: 'registro', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'list-users', component: ListUsersComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: '', redirectTo:'/formulari', pathMatch:'full'}, //cuando no ponemos nada 
-  {path: '**', component: NotfoundComponent} //cuando no encuentra la paguina
+  {path: 'merchandising', component: MerchandisingComponent},
+  {path: 'compra', component: CompraComponent},
+  {path: '', redirectTo:'/quisom', pathMatch:'full'},
+  {path: '**', component: NotfoundComponent} //la darrera!!!
 ];
 
 @NgModule({
