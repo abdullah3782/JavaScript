@@ -14,12 +14,30 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MerchandisingComponent } from './components/merchandising/merchandising.component';
 import { CompraComponent } from './components/compra/compra.component';
-import {CookieService} from 'ngx-cookie-service';
-import 
+import {HttpClientModule} from '@angular/common/http';
+import { ProvesConnectarComponent } from './components/proves-connectar/proves-connectar.component';
+
 @NgModule({
-  declarations: [AppComponent, QuisomComponent, EquipComponent, RegistroComponent, ValidarNomDirective, ValidarRepetirDirective, LoginComponent, NotfoundComponent, LogoutComponent, MerchandisingComponent, CompraComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [CookieService],
+  declarations: [
+    AppComponent,
+    QuisomComponent,
+    EquipComponent,
+    RegistroComponent,
+    ValidarNomDirective,
+    ValidarRepetirDirective,
+    LoginComponent,
+    NotfoundComponent,
+    LogoutComponent,
+    MerchandisingComponent,
+    CompraComponent,
+    ProvesConnectarComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

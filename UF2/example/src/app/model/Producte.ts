@@ -3,8 +3,8 @@ export class Producte {
   #nomProducte: string;
   #descripcio: string;
   #preu: number;
-  #quantitat:number;
   #disponibilitat: number;
+  #quantitat: number;
 
   constructor(
     nomImatge: string = '',
@@ -12,14 +12,14 @@ export class Producte {
     descripcio: string = '',
     preu: number = 0,
     disponibilitat: number = 0,
-    quantitat:number=0
+    quantitat: number = 0
   ) {
     this.#nomImatge = nomImatge;
     this.#nomProducte = nomProducte;
     this.#descripcio = descripcio;
     this.#preu = preu;
-    this.#quantitat=quantitat;
     this.#disponibilitat = disponibilitat;
+    this.#quantitat = quantitat;
   }
 
   get nomImatge(): string {
@@ -34,11 +34,12 @@ export class Producte {
   get preu(): number {
     return this.#preu;
   }
-  get quantitat(): number {
-    return this.#quantitat;
-  }
   get disponibilitat(): number {
     return this.#disponibilitat;
+  }
+
+  get quantitat(): number {
+    return this.#quantitat;
   }
 
   set nomImatge(nomImatge: string) {
@@ -53,12 +54,13 @@ export class Producte {
   set preu(preu: number) {
     this.#preu = preu;
   }
-  set quantitat(quantitat: number) {
-    this.#quantitat = quantitat;
-  }
   set disponibilitat(disponibilitat: number) {
     this.#disponibilitat = disponibilitat;
   }
+  set quantitat(quantitat: number) {
+    this.#quantitat = quantitat;
+  }
+
   toJSON(): any {
     return {
       nomImatge: this.#nomImatge,

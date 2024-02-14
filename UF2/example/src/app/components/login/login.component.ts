@@ -14,7 +14,7 @@ export class LoginComponent {
   login: FormGroup;
   newUser: User;
   mensaje: string;
-//constructor
+  //constructor
   constructor(private usuarioService: UsuariosService, private router: Router) {
     this.login = new FormGroup({
       nomUsuari: new FormControl('', [
@@ -27,19 +27,16 @@ export class LoginComponent {
     this.newUser = new User('', '');
     this.mensaje = '';
   }
-//envia el usuario
+  //envia el usuario
   enviament(): void {
     this.newUser = new User(
       this.login.value.nomUsuari,
       this.login.value.correo
     );
-//valida el usuario para crear la local storage y mostrar el mensaje de usuario
+    //valida el usuario para crear la local storage y mostrar el mensaje de usuario
     if (this.usuarioService.validateUsers(this.newUser)) {
-      this.mensaje = 'Usuario validado correctamente.';
       localStorage.setItem('Logeado', 'true');
-     // window.location.reload()
-     this.router.navigate(['/quisom']);
-
+      this.router.navigate(['/quisom']);
     } else {
       this.mensaje = 'Error: Usuario no encontrado.';
     }

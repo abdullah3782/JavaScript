@@ -23,7 +23,8 @@ export class UsuariosService {
 
   validateUsers(user: User): boolean {
     return this.usuarios.some(
-      u => u.nomUsuari === user.nomUsuari && u.correuElectronic === user.correuElectronic
+      (u) =>
+        u.nomUsuari === user.nomUsuari && u.correuElectronic === user.correuElectronic
     );
   }
 

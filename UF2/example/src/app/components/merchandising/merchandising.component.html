@@ -4,12 +4,12 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Imagen</th>
+            <th scope="col">Imatge</th>
             <th scope="col">Nom</th>
-            <th scope="col">Descripcio</th>
+            <th scope="col">Descripció</th>
             <th scope="col">Preu</th>
             <th scope="col">Disponibilitat</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Accions</th>
           </tr>
         </thead>
         <tbody>
@@ -17,7 +17,7 @@
             <td><img src="assets/img/{{ producto.nomImatge }}" alt="" width="100px"></td>
             <td>{{ producto.nomProducte }}</td>
             <td>{{ producto.descripcio }}</td>
-            <td>{{ producto.preu }}</td>
+            <td>{{ producto.preu }}€</td>
             <td>{{ producto.disponibilitat }}</td>
             <td><button (click)="afegirProducte(producto)" class="btn btn-danger">Afegir Producte</button></td>
           </tr>
@@ -25,25 +25,4 @@
       </table>
     </div>
   </div>
-<div *ngFor="let p of productoAAnyadir">
-{{p.nomProducte}} -- {{p.descripcio}} -- {{p.preu}} -- {{p.disponibilitat}} --{{p.quantitat}}
-
 </div>
-
-  <!-- <div class="row">
-    <div class="col" *ngIf="usuarioEditado.nomUsuari != '' && confirmar == false">
-      <div class="text-center">
-        <div>
-          <h3>Usuario editado</h3>
-          <p>Nombre de usuario: {{ usuarioEditado.nomUsuari }}</p>
-          <p>Contraseña: {{ usuarioEditado.contrasenya }}</p>
-        </div>
-        <div>
-          <p>Quieres confirmar los canvios?</p>
-          <button (click)="confirmarUsuario()" class="btn btn-danger">Confirmar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
--->

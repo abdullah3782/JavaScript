@@ -1,8 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { isEmpty } from 'rxjs';
+import { Component } from '@angular/core';
 import { Producte } from 'src/app/model/Producte';
-import { MerchandisingComponent } from '../merchandising/merchandising.component';
-import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -11,18 +8,18 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./compra.component.css'],
 })
 export class CompraComponent {
-  carrito: Producte[] = [];
+  cesta: Producte[] = [];
   precio: number = 0;
   mensaje!: string;
   constructor(private cookieService: CookieService) {
-    if (this.cookieService.check('carrito')) {
-      this.carrito = JSON.parse(this.cookieService.get('carrito'));
+    if (this.cookieService.check('cesta')) {
+      this.cesta = JSON.parse(this.cookieService.get('cesta'));
     }
     this.calcularPrecio();
   }
 
   calcularPrecio() {
-    this.carrito.forEach((producto) => {
+    this.cesta.forEach((producto) => {
       this.precio += producto.preu * producto.quantitat;
     });
   }
@@ -32,7 +29,7 @@ export class CompraComponent {
   }
 
   cancelarCompra() {
-    this.cookieService.delete('carrito');
+    this.cookieService.delete('cesta');
     window.location.reload();
   }
 }
