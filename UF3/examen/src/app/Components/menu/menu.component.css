@@ -1,0 +1,18 @@
+.navigation {
+  margin-top: 10px;
+}
+
+.navigation a {
+  color: #333;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.navigation a:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.navigation a:not(:last-child) {
+  margin-right: 10px;
+}
