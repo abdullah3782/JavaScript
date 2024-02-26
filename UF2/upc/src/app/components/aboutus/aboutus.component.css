@@ -1,0 +1,42 @@
+.bod {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Centra el contenedor de las tarjetas horizontalmente */
+  align-items: center; /* Centra el contenedor de las tarjetas verticalmente */
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Distribuye el espacio alrededor de las tarjetas */
+  align-items: flex-start; /* Alinea las tarjetas al comienzo de la línea */
+  max-width: 1020px; /* Ancho suficiente para contener tres tarjetas con espacio */
+  margin-top: 0%;
+}
+
+.person {
+  background-color: #fff;
+  margin: 10px; /* Espacio entre tarjetas */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px; /* Ancho fijo para cada tarjeta */
+  height: auto; /* Altura automática para manejar el contenido variable */
+  flex: 0 0 auto; /* Evita que las tarjetas se estiren o encojan */
+}
+
+.person img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.name, .info h6, .info p {
+  margin: 10px 0;
+}
+
+.info p {
+  color: #666;
+}
