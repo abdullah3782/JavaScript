@@ -1,9 +1,29 @@
-#menuBar {
-  background-color: transparent;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+#homeBody {
+  background-image: url('/assets/img/blanco.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 100vw;
+  min-height: 87.7vh;
+
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+
+  position: relative;
+
 }
 
-.navbar-nav li a {
-  color: black;
+
+
+#title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900;
+  position: absolute;
+  bottom: 2rem;
 }
 
 .bod {
@@ -12,7 +32,6 @@
   display: flex;
   justify-content: center; /* Centra el contenedor de las tarjetas horizontalmente */
   align-items: center; /* Centra el contenedor de las tarjetas verticalmente */
-  margin-top: 50%;
 }
 
 .cards-container {
