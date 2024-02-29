@@ -1,5 +1,3 @@
-
-
 <div id="homeBody">
 
   <div id="title" class="text-dark text-white" >
@@ -104,4 +102,49 @@
         </div>
     </div>
 </div>
+</div>
+
+
+
+
+<div class="container">
+  <form [formGroup]="contact" (ngSubmit)="submit()" class="contact-form">
+    <h2>Contact Us</h2>
+    <fieldset>
+      <!-- Nom -->
+      <div class="form-group">
+        <label for="nombre">Nom* :</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Pon tu nombre" formControlName="nombre">
+        <div *ngIf="contact.get('nombre')?.errors?.['required'] && contact.get('nombre')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email* :</label>
+        <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
+        <div *ngIf="contact.get('email')?.errors?.['required'] && contact.get('email')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+      </div>
+
+      <!-- Mensaje -->
+      <div class="form-group">
+        <label for="mensaje">Mensaje* :</label>
+        <textarea class="form-control" id="mensaje" placeholder="Pon el mensaje" formControlName="mensaje" rows="6"></textarea>
+        <div *ngIf="contact.get('mensaje')?.errors?.['required'] && contact.get('mensaje')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+      </div>
+
+      <!-- Boton Submit -->
+      <div class="text-center mt-5">
+        <button type="submit" class="submit-btn" [disabled]="contact.invalid">Enviar</button>
+      </div>
+    </fieldset>
+  </form>
 </div>
