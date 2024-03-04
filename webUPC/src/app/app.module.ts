@@ -12,6 +12,7 @@ import { TournamentComponent } from './components/tournaments/tournaments.compon
 import { ValidarEmailDirective } from './directives/validar-email.directive';
 import { ValidarPasswordDirective } from './directives/validar-password.directive';
 import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { ValidarRepetirDirective } from './directives/validar-repetir.directive'
     TournamentComponent,
     ValidarEmailDirective,
     ValidarPasswordDirective,
-    ValidarRepetirDirective
+    ValidarRepetirDirective,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

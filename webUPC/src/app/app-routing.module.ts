@@ -10,7 +10,8 @@ const routes: Routes = [
   {path: 'event', component: EventComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'tournaments', component: TournamentComponent}
+  {path: 'tournaments', component: TournamentComponent},
+
 
 ];
 
