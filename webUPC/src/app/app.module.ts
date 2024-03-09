@@ -13,6 +13,8 @@ import { ValidarEmailDirective } from './directives/validar-email.directive';
 import { ValidarPasswordDirective } from './directives/validar-password.directive';
 import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http'; // Agrega esta importación
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +27,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ValidarEmailDirective,
     ValidarPasswordDirective,
     ValidarRepetirDirective,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

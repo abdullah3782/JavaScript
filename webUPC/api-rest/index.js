@@ -1,219 +1,246 @@
-'use strict';
-//importaciones
-const express = require('express');//importo el paquete
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const cors = require('cors');
+//crida als paquets que necessitem
+const express = require('express'); //crida del framework Express
+const cors=require('cors');//crida del paquet cors per a evitar l'error de CORS
+const jwt=require ('jsonwebtoken');//crida al paquet que fa possible a Node la creació i gestió de JWT
+const mysql = require('mysql');//crida del paquet per poder connectar-nos a mysql des de Node
 
-//uso
-const app = express();//llamo para ser usado el paquete
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const app = express();//càrrega del framework
 
-//DEJO ENTRAR A LAS RUTAS DESDE FUERA, EVITO ERROR CORS
-app.use(cors())
 
-//get para el recurso hola
-app.get('/hola', (req, res) => {
-    res.send({ message: "Hola món des de /hola" })
-})
+const accessTokenSecret="67463fghfgh43473";
 
-// post para el recurso hello
-app.post('/hello', (req, res) => {
-    res.send({ message: "Hola món des de /hello" })
-})
-
-app.get('/', (req, res) => {
-    res.send({ message: "Estic al meu servidor node express" })
-})
-
-////// AIXÒ ÉS NOU I SERIA PER TREBALLAR AMB MYSQL
-////// COMPTE: hem d'instal·lar mysql per a Node Express amb npm i -S mysql
-////// importem mysql
-
-////// declarem els paràmetres de connexió (millor si l’usuari de connexió no és root sinó un usuari específic per aquesta BBDD
-////// i amb permissos restringits
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'm06',
-    user: 'm07',
-    password: 'm07'
+//cadena de connexió per poder connectar-nos a la nostra BD
+const connection = mysql.createConnection({
+  host: 'localhost',
+  database: 'm06',
+  user: 'm07',
+  password: 'm07'
 });
 
 
-/////// fem servir la BBDD que tenim
+app.use(cors());//apliquem el paquet cors per a tots els recursos
 
-// Ruta POST para el login de los usuarios
-// establecemos una ruta POST en la aplicación Express. La ruta es '/vueling/login', lo que significa que manejará solicitudes POST enviadas a esa URL específica.
-app.post('/vueling/login', (req, res) => {
-    // extraemos las propiedades usuari y password del cuerpo de la solicitud (req.body). Estos valores se envían desde el cliente como parte de la solicitud POST
-    const { usuari, password } = req.body;
+app.use(express.json());//treballem amb JSONs
 
-    // comprovamos lo que nos a llegado al servidor
-    console.log("Usuario recibido en el servidor:", usuari);
-    console.log("Contraseña recibida en el servidor:", password);
+app.use(express.urlencoded({extended: true}));
+//per a la vista
 
-    /// Realiza una consulta SQL para consultar la base de datos si existe el usuario i la contraseña en la tabla 'users'
-    connection.query(
-        'SELECT * FROM users WHERE usuari = ? AND password = ?',
-        [usuari, password],
-        function (error, results) {
-            // Manejo de errores
-            if (error) {
-                // mostramos por consola el error
-                console.error('Error en la consulta de autenticación:', error.message);
+//app.use('/', express.static(__dirname + '/public/'));
 
-                // Si hay un error
-                // Enviamos una respuesta con un código de estado 500 ("Internal Server Error" (Error interno del servidor)) y un objeto JSON con:
-                // un booleno de error a true, un array de resultats a null i enviamos un mensage con el string "Error en la autenticación"
-                res.status(500).json({
-                    error: true,
-                    resultats: null,
-                    message: "Error en la autenticación"
-                });
-            }
+//comprovació que és usuari amb token, només en les rutes que necessitem
+const authenticateJWT = (req, res, next) => {
+  //console.log("Estic a authenticateJWT");
+  const authHeader = req.headers.authorization;
+  //console.log(authHeader);
+      if (authHeader) {
+          const token = authHeader.split(' ')[1];
 
-            // mostramos el resultado (La informacion del usuario) si no a habido error en la consulta
-            console.log("Resultados de la consulta:", results);
+          jwt.verify(token, accessTokenSecret, (err, user) => {
+              if (err) {
+                  console.log(err)
+                  return res.sendStatus(403);
+              }
 
-            // Verificar si se encontró una coincidencia
-            if (results.length === 1) {
-                // Credenciales válidas, a encontrado el usuario
-                // Enviamos una respuesta con un código de estado 200 (OK) y un objeto JSON con:
-                // un booleno de error a false, un array de resultats con los resultados i enviamos un mensage con el string "Autenticación exitosa"
-                res.status(200).json({
-                    error: false,
-                    resultats: results,
-                    message: "Autenticación exitosa"
-                });
-            } else {
-                // Si no a encontrado ningin usuario
-                // Enviamos una respuesta con un código de estado 401 ( No a encontrado el usuario o "Unauthorized" (No autorizado)) y un objeto JSON con:
-                // un booleno de error a true, un array de resultats a null i enviamos un mensage con el string "Credenciales incorrectas"
-                res.status(401).json({
-                    error: true,
-                    resultats: null,
-                    message: "Credenciales incorrectas"
-                });
-            }
-        });
+              req.user = user;//recollo les dades de la part que jo he enviat
+              next();
+          });
+      } else {
+          res.json({error:true,data:"Permís denegat al servidor"});
+      }
+};
+
+
+//per a la crida al recurs /
+app.get('/', (req,res) => {
+  res.send('Hello to my web');
+  //res.sendFile(process.cwd()+"/view/index.html"); //angular dins del servidor
 });
 
-// Ruta POST para el registro de los usuarios
-// establecemos una ruta POST en la aplicación Express. La ruta es '/vueling/register', lo que significa que manejará solicitudes POST enviadas a esa URL específica.
-app.post('/vueling/register', function (req, res) {
-    // extraemos las propiedades nom, cognom, gmail, password, y usuari del cuerpo de la solicitud (req.body). Estos valores se envían desde el cliente como parte de la solicitud POST
-    const { nom, cognom, gmail, password, usuari } = req.body;
+//recurs per a loguejar-se
+app.post('/login', function (req, res) {
 
-    // Realiza una consulta SQL para insertar un nuevo usuario en la tabla 'users'
-    connection.query(
-        'INSERT INTO users (nom, cognom, gmail, password, usuari) VALUES (?, ?, ?, ? ,?)',
-        [nom, cognom, gmail, password, usuari],
-        function (error, results) {
-            // Manejo de errores
-            if (error) {
-                // mostramos por consola el error
-                console.error('Error en la inserción de usuario:', error.message);
+  //recullo l'usuari
+  let usuari=req.body.usuari;
+  console.log(usuari);
 
-                // Credenciales inválidas
-                // Enviamos una respuesta con un código de estado 400 ("Bad Request" (Solicitud incorrecta)) y un objeto JSON con:
-                // un booleno de error a true, un array de resultats a null i enviamos un mensage con el string "Error en la inserción de usuario"
-                res.status(400).json({
-                    error: true,
-                    resultats: null,
-                    message: "Error en la inserción de usuario"
-                });
-            } else {
-                // Credenciales válidas
-                // Enviamos una respuesta con un código de estado 200 (OK) y un objeto JSON con:
-                // un booleno de error a false, un array de resultats con los resultados i enviamos un mensage con el string "Usuario insertado con éxito"
-                res.status(200).json({
-                    error: false,
-                    resultats: results,
-                    message: "Usuario insertado con éxito"
-                });
-            }
-        }
-    );
+  //recullo la contrasenya
+  let contrasenya=req.body.contrasenya;
+  console.log(contrasenya);
+
+  //ens connectem a la BD declara a la cadena de connexió de dalt
+  connection.connect(function(error) {
+    if (error) {
+        console.error('Error connecting: ' + error.stack);
+        return;
+    }
+    console.log('Connected as id ' + connection.threadId);
+  });
+
+  //creem l'SQL per poder fer la consulta preparada
+  var sql = 'SELECT * FROM usuaris WHERE usuari=? and contrasenya=?';
+
+  //fem la consulta
+  connection.query(sql,[usuari, contrasenya],function(error, result){
+    if (error!=null){ //si existeix un MySql error
+      res.json({error:true, data:'Problemes amb el servidor'});
+
+    }
+    else{//si tot OK
+       console.log(result[0]);
+      if(result[0]!=undefined){
+        const accessToken = jwt.sign({dni: result[0].dni,  role: result[0].role }, accessTokenSecret,{ expiresIn: '20m' });
+
+        //enviem la token
+        res.json({error:false, data:accessToken});
+      }else{
+        res.json({error:true, data:'Credencials incorrectes'});
+      }
+
+    }
+
+  });
+
+
+})//end recurs /login
+
+
+app.get('/events', (req, res) => {
+
+// Realiza una consulta SQL para obtener las ciudades desde la base de datos
+connection.query('SELECT * FROM events', function (error, results) {
+  // Manejo de errores
+  if (error) {
+      // mostramos por consola el error
+      console.error('Error en la consulta de autenticación:', error.message);
+
+      // Si a habido un error en la consulta
+      // Enviamos una respuesta con un código de estado 500 ("Internal Server Error" (Error interno del servidor)) y un objeto JSON con:
+      // un booleno de error a true, un array de resultats a null i enviamos un mensage de error
+      res.status(500).json({
+          error: true,
+          results: null,
+          message: "Error en la autenticación"
+      });
+  } else {
+
+      //let id = results.map(results => results.id);
+      //let id=results[0].id;
+
+      // Si no a habido ningun error
+      // Enviamos una respuesta con un código de estado 200 (OK) y un objeto JSON con:
+      // un booleno de error a false, un array de resultats con el array de todas ciudades i enviamos un mensage satisfactorio
+      res.status(200).json({
+          error: false,
+          //id: id,
+          results:results,
+          message: "Datos recojidos correctamente"
+      });
+
+  }
 });
 
-// Ruta GET para recojer las ciudades de los vuelos en la base de datos
-// establecemos una ruta GET en la aplicación Express. La ruta es '/vueling/ciudades', lo que significa que manejará solicitudes GET enviadas a esa URL específica.
-app.get('/app/tournaments', (req, res) => {
-    // api.get....(api/:username)
-    // const usuario= req.params.username;
+}); //end recurs /allUsers
 
-    // Realiza una consulta SQL para obtener las ciudades desde la base de datos
-    connection.query('SELECT * FROM tournaments', function (error, results) {
-        // Manejo de errores
+
+
+
+app.post('/events/add', function (req, res) {
+  // extraemos los valores del cuerpo de la solicitud (req.body). Estos valores se envían desde el cliente como parte de la solicitud POST
+  const {nombre, descripcion, fecha, hora, creado_por } = req.body;
+
+  console.log("dgdgrd"+creado_por);
+
+  // Realiza una consulta SQL para insertar nuevos datos en la base de datos
+  connection.query(
+  'INSERT INTO events (nombre, descripcion, fecha, hora, creado_por) VALUES (?, ?, ?, ?, ?)',
+  [nombre, descripcion, fecha, hora, creado_por],
+  function (error, results) {
+  // Manejo de errores
+  if (error) {
+  // mostramos por consola el error
+  console.error('Error en la inserción en la base de datos:', error.message);
+
+  // Si a habido un error en la consulta
+  // Enviamos una respuesta con un código de estado 400 ("Bad Request" (Solicitud incorrecta)) y un objeto JSON con:
+  // un booleno de error a true, un array de resultats a null i enviamos un mensage de error
+  res.status(400).json({
+  error: true,
+  results: null,
+  message: "Error en la inserción en la base de datos"
+  });
+  } else {
+  // Si no a habido ningun error
+  // Enviamos una respuesta con un código de estado 200 (OK) y un objeto JSON con:
+  // un booleno de error a false, un array de resultats con los resultados i enviamos un mensage satisfactorio
+
+    console.log();
+
+
+  res.status(200).json({
+  error: false,
+  results: results,
+  message: "Datos insertados correctamente"
+  });
+  }
+  }
+  );
+  });
+
+
+
+  app.put('/events/:id', function (req, res) {
+    const { id } = req.params;
+    const { nombre, descripcion, fecha, hora, creado_por } = req.body;
+
+    const sql = 'UPDATE events SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, creado_por = ? WHERE id = ?';
+
+    connection.query(sql, [nombre, descripcion, fecha, hora, creado_por, id], function (error, results) {
         if (error) {
-            // mostramos por consola el error
-            console.error('Error en la consulta de autenticación:', error.message);
-
-            // Si hay un error
-            // Enviamos una respuesta con un código de estado 500 ("Internal Server Error" (Error interno del servidor)) y un objeto JSON con:
-            // un booleno de error a true, un array de resultats a null i enviamos un mensage con el string "Error en la autenticación"
-            res.status(500).json({
+            console.error('Error al actualizar el evento:', error.message);
+            res.status(400).json({
                 error: true,
-                resultats: null,
-                message: "Error en la autenticación"
+                message: "Error al actualizar el evento"
             });
         } else {
-            // Creamos un nuevo array para almacenar solo los nombres de las ciudades, si no nos pasara un array de objetos con los nombres de las ciudades
-            // const tournaments = results.map(tournaments => tournaments.name);
-
-            // Envia la lista de ciudades como respuesta con un código de estado 200 (OK) y un objeto JSON con:
-            // un booleno de error a false, un array de resultats con el array de todas ciudades i enviamos un mensage con el string "Ciudades recojidas de la base de datos"
             res.status(200).json({
                 error: false,
-                resultats: results,
-                message: "Ciudades recojidas de la base de datos"
+                results: results,
+                message: "Evento actualizado correctamente"
             });
-
         }
     });
 });
 
 
 
+app.delete('/events/:id', function (req, res) {
+  const { id } = req.params;
 
+  const sql = 'DELETE FROM events WHERE id = ?';
 
-
-
-app.get('/app/events', (req, res) => {
-  // api.get....(api/:username)
-  // const usuario= req.params.username;
-
-  // Realiza una consulta SQL para obtener las ciudades desde la base de datos
-  connection.query('SELECT * FROM events', function (error, results) {
-      // Manejo de errores
+  connection.query(sql, [id], function (error, results) {
       if (error) {
-          // mostramos por consola el error
-          console.error('Error en la consulta de autenticación:', error.message);
-
-          // Si hay un error
-          // Enviamos una respuesta con un código de estado 500 ("Internal Server Error" (Error interno del servidor)) y un objeto JSON con:
-          // un booleno de error a true, un array de resultats a null i enviamos un mensage con el string "Error en la autenticación"
-          res.status(500).json({
+          console.error('Error al eliminar el evento:', error.message);
+          res.status(400).json({
               error: true,
-              resultats: null,
-              message: "Error en la autenticación"
+              message: "Error al eliminar el evento"
           });
       } else {
-
-
-
-         // Envia la lista de ciudades como respuesta con un código de estado 200 (OK) y un objeto JSON con:
-          // un booleno de error a false, un array de resultats con el array de todas ciudades i enviamos un mensage con el string "Ciudades recojidas de la base de datos"
           res.status(200).json({
               error: false,
-              resultats: results,
-              message: "Ciudades recojidas de la base de datos"
+              results: results,
+              message: "Evento eliminado correctamente"
           });
-
       }
   });
 });
+
+
+
+
+
+
+
 
 
 

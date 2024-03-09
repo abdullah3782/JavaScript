@@ -1,0 +1,11 @@
+<div class="navigation" *ngIf="isLoggedIn">
+  <a routerLink="/general">Qui som</a> |
+  <a routerLink="/general">Col·leccions</a> |
+  <a routerLink="/general">Cistella</a> |
+  <a routerLink="/general">Área privada</a> |
+  <a (click)="logout()" routerLink="/">Logout</a>
+</div>
+
+<div class="navigation" *ngIf="!isLoggedIn">
+  <a routerLink="/">Iniciar sesión</a>
+</div>
